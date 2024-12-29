@@ -1,1 +1,0 @@
-{"name":"Local: Hack","url":"d:\\Codes\\C++\\Codeforces\\TempCodes\\Hack.cpp","tests":[{"id":1734925412447,"input":"2\n100000 3 3\n1 2 3\n1 2 3\n100000 3 2\n1 2 3\n1 2\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Codes\\C++\\Codeforces\\TempCodes\\Hack.cpp","group":"local","local":true}

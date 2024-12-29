@@ -23,8 +23,8 @@
 /*
     @Raj_Patel_7807
     Code By : Raj_Patel
-    Date : 23/12/2024    Time -> 15:31:07
-    Problem : wlcB
+    Date : 23/12/2024    Time -> 15:00:58
+    Problem : wlc24A
 */
 
 #include <bits/stdc++.h>
@@ -142,28 +142,29 @@ bool checkBit(ll n, int pos) { return n & (1LL << pos); }
 //=======================^===================================================================^=======================\\
 
 void solve() {
-    in(ll, n);
-    vin(ll, a, n);
-    vin(ll, b, n);
+    inn(ll, n, q);
+    in(string, s);
 
-    ll row = 0, clm = 0, ext = 0;
-    fo(i, 0, n-2) {
-        if((a[i] == 1 && a[i+1] == 1)) {
-            row++;
-            i++;
-        } else if(a[i] == 1) {
-            ext++;
-        }
+    vl pre(n+1, 0);
+    // pre[0] = (s[0] - '0') % 9;
+    fo(i, 1, n) {
+        pre[i] = (pre[i-1] + (s[i-1]-'0')) % 9;
     }
-    fo(i, 0, n-2) {
-        if((b[i] == 1 && b[i+1] == 1)) {
-            row++;
-            i++;
-        } else if(b[i] == 1) {
-            ext++;
-        }
+
+    fq(q) {
+        inn(ll, l1, r1);
+        inn(ll, l2, r2);
+        in(ll, r);
+
+        ll a = (pre[r1] - pre[l1-1]);
+        ll b = (pre[r2] - pre[l2-1]);
+
+        a = (a + 9) % 9;
+        b = (b + 9) % 9;
+
+        debug(((a*b)%9 == r));
+        YES(((a*b)%9 == r));
     }
-    out(row+clm+ext);
 }
 
 signed main() {
@@ -177,7 +178,7 @@ signed main() {
     // #endif
 
     ll tt = 1;
-    cin >> tt;
+    // cin >> tt;
 
     while(tt--) {
         solve();
