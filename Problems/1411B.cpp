@@ -23,8 +23,8 @@
 /*
     @Raj_Patel_7807
     Code By : Raj_Patel
-    Date : 04/01/2025    Time -> 09:33:27
-    Problem : 2042B
+    Date : 03/01/2025    Time -> 15:43:52
+    Problem : 1411B
 */
 
 #include <bits/stdc++.h>
@@ -163,46 +163,26 @@ inline bool checkbit(ll n, ll pos) { return n & (1LL << pos); }
 
 void solve() {
     in(ll, n);
-    vin(ll, a, n);
 
-    ll points = 0;
-    ll one = 0, moreOne = 0;
-
-    ml mpp;
-    fo(i, 0, n-1) {
-        mpp[a[i]]++;
-    }
-    debug(mpp);
-
-    bool flag = true;
-    ft(x, mpp) {
-        if(x.SS == 1) {
-            if(flag) {
-                one++;
-                points += 2;
-                flag = false;
-            } else {
-                flag = true;
-            }
-        } else {
-            moreOne++;
-            points += 1;
+    while(true) {
+        ll m = n;
+        vl digits;
+        while(m > 0) {
+            if(m % 10 != 0) digits.PB(m % 10);
+            m /= 10;
         }
-    }
-    debug(one);
-    debug(moreOne);
 
-    ll total = one + moreOne;
-    debug(total);
-
-    if(total > (n+1)/2 && moreOne != 0) {
-        points -= (total - (n+1)/2);
+        bool flag = true;
+        ft(i, digits) {
+            if(n % i != 0) {
+                n ++;
+                flag = false;
+                break;
+            }
+        }
+            if(flag) break;
     }
-    if(total > (n+1)/2 && one != 0) {
-        points -= 2 * (total - (n+1)/2);
-    }
-
-    out(points);
+    out(n);
 }
 
 signed main() {
