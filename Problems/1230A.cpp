@@ -23,8 +23,8 @@
 /*
     @Raj_Patel_7807
     Code By : Raj_Patel
-    Date : 08/01/2025    Time -> 17:49:25
-    Problem : 1679A
+    Date : 07/01/2025    Time -> 19:17:11
+    Problem : 1230A
 */
 
 #include <bits/stdc++.h>
@@ -162,14 +162,15 @@ inline bool checkbit(ll n, ll pos) { return n & (1LL << pos); }
 //=======================^===================================================================^=======================\\
 
 void solve() {
-    in(ll, n);
+    innn(ll, a, b, c);
+    in(ll, d);
 
-    if(n & 1 || n < 4) {
-        out(-1); rr;
-    }
+    ll sum = a+b+c+d;
+    ll mx = max({a, b, c, d});
+    ll mn = min({a, b, c, d});
+    debug(sum-(mx+mn));
 
-    outt((n+5)/6);
-    out(n/4);
+    NO(sum-2*(mx+mn) && sum-2*(mx));
 }
 
 signed main() {
@@ -183,7 +184,7 @@ signed main() {
     // #endif
 
     ll tt = 1;
-    cin >> tt;
+    // cin >> tt;
 
     while(tt--) {
         solve();

@@ -23,8 +23,8 @@
 /*
     @Raj_Patel_7807
     Code By : Raj_Patel
-    Date : 08/01/2025    Time -> 17:49:25
-    Problem : 1679A
+    Date : 07/01/2025    Time -> 17:04:35
+    Problem : 1828A
 */
 
 #include <bits/stdc++.h>
@@ -164,12 +164,10 @@ inline bool checkbit(ll n, ll pos) { return n & (1LL << pos); }
 void solve() {
     in(ll, n);
 
-    if(n & 1 || n < 4) {
-        out(-1); rr;
+    fo(i, 1, n) {
+        outt(2*i);
     }
-
-    outt((n+5)/6);
-    out(n/4);
+    out("");
 }
 
 signed main() {
