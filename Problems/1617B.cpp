@@ -23,8 +23,8 @@
 /*
     @Raj_Patel_7807
     Code By : Raj_Patel
-    Date : 03/01/2025    Time -> 15:53:09
-    Problem : 1362A
+    Date : 08/01/2025    Time -> 21:35:56
+    Problem : 1617B
 */
 
 #include <bits/stdc++.h>
@@ -120,9 +120,8 @@ const ll MOD = 1e9 + 7;
 const ll MOD1 = 998244353;
 
 // Functions
-#define countBit __builtin_popcount
-#define countBitll __builtin_popcountll
-inline ll gcd(ll a, ll b) { return (b == 0) ? a : gcd(b, a % b); }
+#define cntSetBit __builtin_popcountll
+inline ll gcd(ll a, ll b) { while(b) { a %= b; swap(a, b); } return a; }
 inline ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
 inline bool isPrime(ll n) {
     if(n <= 1) return false; if(n <= 3) return true; if(n % 2 == 0 || n % 3 == 0) return false;
@@ -150,6 +149,7 @@ inline bool isPerfectSq(ll n) { if(n < 0) return false; ll sr = static_cast<ll>(
 inline bool compbyss(const pair<ll, ll>& a, const pair<ll, ll>& b) {
     if(a.second == b.second) { return a.first < b.first; } return a.second < b.second;
 }
+inline ll msbPos(ll n) { if(n == 0) { return -1; } return 63 - __builtin_clzll(n); }
 inline ll modsum(ll a, ll b, ll mod = MOD) { return (a % mod + b % mod) % mod; }
 inline ll modsub(ll a, ll b, ll mod = MOD) { return ((a % mod - b % mod) + mod) % mod; }
 inline ll modmult(ll a, ll b, ll mod = MOD) { return (a % mod * b % mod) % mod; }
@@ -162,12 +162,23 @@ inline bool checkbit(ll n, ll pos) { return n & (1LL << pos); }
 //=======================^===================================================================^=======================\\
 
 void solve() {
-    inn(ll, a, b);
+    in(ll, n);
 
-    if(a == b) {
-        out(0);
-        rr;
-    } 1474B
+    if((n-1) & 1) {
+        outt((n-1)/2);
+        outt((n-1)/2 + 1);
+        out(1);
+    } else {
+        if((n-1)/2 & 1) {
+            outt((n-1)/2 + 2);
+            outt((n-1)/2 - 2);
+            out(1);
+        } else {
+            outt((n-1)/2 + 1);
+            outt((n-1)/2 - 1);
+            out(1);
+        }
+    }
 }
 
 signed main() {

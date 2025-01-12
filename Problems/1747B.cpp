@@ -23,8 +23,8 @@
 /*
     @Raj_Patel_7807
     Code By : Raj_Patel
-    Date : 06/01/2025    Time -> 18:55:05
-    Problem : 1620B
+    Date : 08/01/2025    Time -> 22:08:11
+    Problem : 1747B
 */
 
 #include <bits/stdc++.h>
@@ -162,37 +162,24 @@ inline bool checkbit(ll n, ll pos) { return n & (1LL << pos); }
 //=======================^===================================================================^=======================\\
 
 void solve() {
-    inn(ll, w, h);
-    vvl a(4);
-    fo(i, 0, 3) {
-        in(ll, n);
-        a[i].resize(n);
-        fo(j, 0, n-1) {
-            cin >> a[i][j];
+    in(ll, n);
+
+    out((n+1)/2);
+
+    if(n == 1) {
+        outt(1);
+        out(2)
+    } else {
+        ll x = (n+1)/2;
+        ll a = 1, b = 3*n;
+
+        while(x--) {
+            outt(a);
+            out(b);
+            a += 3;
+            b -= 3;
         }
     }
-
-    ll mxdif = 0;
-    ll s = -1, side = -1;
-    fo(i, 0, 3) {
-        ll mx = maxval(a[i]);
-        ll mn = minval(a[i]);
-        ll curdif = mx - mn;
-        if(mxdif <= curdif) {
-            mxdif = curdif;
-            s = i;
-            side = mx - mn;
-        } 
-    }
-
-    ll norm = 0;
-    if(s == 1 || s == 0) {
-        norm = h;
-    } else {
-        norm = w;
-    }
-
-    out(side*norm);
 }
 
 signed main() {
