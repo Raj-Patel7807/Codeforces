@@ -1,4 +1,4 @@
-//=======================^===================================================================^=======================\\
+//=======================^===================================================================^=======================//
 
 /*
 
@@ -18,13 +18,13 @@
 
 */
 
-//=======================^===================================================================^=======================\\
+//=======================^===================================================================^=======================//
 
 /*
     @Raj_Patel_7807
     Code By : Raj_Patel
-    Date : 12/01/2025    Time -> 20:08:12
-    Problem : 2055A
+    Date : 13/01/2025    Time -> 17:35:37
+    Problem : 1095A
 */
 
 #include <bits/stdc++.h>
@@ -36,7 +36,9 @@ using namespace std;
 #define endl '\n'
 #define rr return
 #define precision(x) cout << fixed << setprecision(x)
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
+//=======================^========================= Data Types ==============================^=======================//
 using ll = long long int;
 using db = double;
 using ld = long double;
@@ -55,20 +57,20 @@ using sl = set<ll>;
 using usl = unordered_set<ll>;
 #define int ll
 
-// Loops
+//=======================^============================ Loops ================================^=======================//
 #define fo(i, s, e) for(ll i=(s); i<=(e); ++i)
 #define foo(i, s, e, inc) for(ll i=(s); i<=(e); i+=(inc))
 #define rfo(i, s, e) for(ll i=(s); i>=(e); --i)
 #define ft(x, a) for(auto x : (a))
 #define fq(q) while((q)--)
 
-// Inputs
+//=======================^============================ Input ================================^=======================//
 #define in(type, name) type name; cin >> name;
 #define inn(type, n, k) type n, k; cin >> n >> k;
 #define innn(type, n, m, k) type n, m, k; cin >> n >> m >> k;
 #define vin(type, name, n) vector<type> name(n); for(ll i=0; i<(n); ++i) cin >> name[i];
 
-// Outputs
+//=======================^=========================== Output ================================^=======================//
 inline void YES(bool flag = true, bool small = false) {
     if(flag) { cout << (small ? "Yes\n" : "YES\n"); } else { cout << (small ? "No\n" : "NO\n"); }
 }
@@ -79,7 +81,7 @@ inline void NO(bool flag = true, bool small = false) {
 #define outt(n) cout << (n) << ' ';
 #define vout(a) for(auto x : a) { cout << x << ' '; } cout << '\n';
 
-// STL
+//=======================^============================= STL =================================^=======================//
 #define PB push_back
 #define EB emplace_back
 #define ins insert
@@ -97,7 +99,7 @@ inline void NO(bool flag = true, bool small = false) {
 #define maxid(v) max_element(v.begin(), v.end()) - v.begin()
 #define minid(v) min_element(v.begin(), v.end()) - v.begin()
 
-// Debugging
+//=======================^========================== Debugging ==============================^=======================//
 #ifndef ONLINE_JUDGE
 #define debug(x) cerr << #x << " = "; _print(x); cerr << '\n';
 #else
@@ -116,14 +118,14 @@ void _print(multiset <T> v) { cerr << "[ "; for(T i : v) {_print(i); cerr << ' '
 template <typename T, typename V>
 void _print(map <T, V> v) { cerr << "[ "; for(auto i : v) {_print(i); cerr << ' ';} cerr << "]"; }
 
-// Constants
+//=======================^========================== Constants ==============================^=======================//
 const ld PI = 3.1415926535897932384626L;
 const ld E = 2.7182818284590452353602L;
 const ll INF = 1e18 + 9;
 const ll MOD = 1e9 + 7;
 const ll MOD1 = 998244353;
 
-// Functions
+//=======================^========================== Functions ==============================^=======================//
 #define cntSetBit __builtin_popcountll
 inline ll gcd(ll a, ll b) { while(b) { a %= b; swap(a, b); } return a; }
 inline ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
@@ -163,15 +165,102 @@ inline ll onbit(ll n, ll pos) { return n | (1LL << pos); }
 inline ll offbit(ll n, ll pos) { return n & ~(1LL << pos); }
 inline bool checkbit(ll n, ll pos) { return n & (1LL << pos); }
 
-//=======================^===================================================================^=======================\\
+//=======================^============================ Code =================================^=======================//
 
 inline void solve(ll tt) {
-    innn(ll, n, a, b);
+    in(ll, n);
+    in(string, s);
 
-    NO(abs(a-b)&1);
+    if(n == 1) {
+        out(s);
+        rr;
+    }
+
+    vpp<char, ll> f;
+    char cur = s[0];
+    ll cnt = 0;
+    fo(i, 0, n-1) {
+        if(s[i] == cur) {
+            cnt++;
+        } else {
+            f.PB({cur, cnt});
+            cnt = 1;
+            cur = s[i];
+        }
+    }
+    f.PB({cur, cnt});
+    debug(f);
+
+    ll m = len(f);
+    if(m == 1) {
+        ll j = 0;
+        fo(i, 1, 10) {
+            j += i;
+            if(j < n) {
+                cout << s[0];
+            } else {
+                break;
+            }
+        }
+    }
+
+    fo(i, 0, m-2) {
+        if(f[i].SS >= f[i+1].SS) {
+            cout << f[i].FF << f[i].FF;
+        } else {
+            cout << f[i].FF;
+        }
+    }
+
+    if(f[m-1].SS > f[m-2].SS+1) {
+        cout << f[m-1].FF << f[m-1].FF;
+    } else {
+        cout << f[m-1].FF;
+    }
+
+    // Wrong answer...!!!!!!!!
+    // ll i = n-1;
+    // ll cur = s[i];
+    // char precur = s[i];
+    // ll cnt = 0;
+    // ll precnt = 0;
+    // string ans = "";
+    // while(i >= 0) {
+    //     if(s[i] != cur) {
+    //         cur = s[i];
+
+    //         if(precnt == cnt) {
+    //             ans += precur;
+    //             ans += precur;
+    //         } else {
+    //             ans += precur;
+    //         }
+
+    //         precur = s[i];
+    //         precnt = cnt;
+    //         cnt = 1;
+    //     } else {
+    //         cnt++;
+    //     }
+    //     i--;
+    // }
+
+    // if(precnt == cnt) {
+    //     ans += precur;
+    //     ans += precur;
+    // } else {
+    //     ans += precur;
+    // }
+
+    // reverse(all(ans));
+    // out(ans);
 }
 
+//=======================^============================ main =================================^=======================//
+
 signed main() {
+
+    auto begin = std::chrono::high_resolution_clock::now();
 
     Author is RAJ_PATEL;
 
@@ -182,11 +271,15 @@ signed main() {
     // #endif
 
     ll tt = 1;
-    cin >> tt;
+    // cin >> tt;
 
     while(tt--) {
         solve(tt);
     }
+
+    auto end = std::chrono::high_resolution_clock::now();
+    auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
+    cerr << "Time: " << elapsed.count() * 1e-9 << " s\n";
 
     return 0;
 }

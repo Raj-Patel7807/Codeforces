@@ -24,7 +24,7 @@
     @Raj_Patel_7807
     Code By : Raj_Patel
     Date : 12/01/2025    Time -> 20:15:29
-    Problem : 996B
+    Problem : 2055B
 */
 
 #include <bits/stdc++.h>
