@@ -1,30 +1,3 @@
-// This Approach is Also True..
-// #include <iostream>
-// #include <vector>
-// using namespace std;
-
-// int main() {
-
-//     int n;
-//     cin >> n;
-
-//     vector<long long> vec(n), ans(n, 0); 
-//     for(int i=0; i<n; ++i) {
-//         cin >> vec[i];
-//     }
-//     for(int i=0; i<n; ++i) {
-//         if(vec[i]/2 == (vec[i]- vec[i]/2)) {
-//             ans[i] = vec[i]/2 - 1;
-//         } else {
-//             ans[i] = vec[i]/2;
-//         }
-//     }
-//     for(int i : ans) {
-//         cout << i << endl;
-//     }
-    
-//     return 0;
-// }
 //=======================^===================================================================^=======================//
 
 /*
@@ -50,8 +23,8 @@
 /*
     @Raj_Patel_7807
     Code By : Raj_Patel
-    Date : 14/01/2025    Time -> 10:19:10
-    Problem : 1335A
+    Date : 14/01/2025    Time -> 10:40:18
+    Problem : 1117B
 */
 
 #include <bits/stdc++.h>
@@ -194,9 +167,22 @@ inline bool checkbit(ll n, ll pos) { return n & (1LL << pos); }
 //=======================^============================ Code =================================^=======================//
 
 inline void solve(ll tt) {
-    in(ll, n);
+    innn(ll, n, m, k);
+    vin(ll, a, n);
 
-    out((n-1)/2);
+    sortall(a);
+
+    ll happy = a[n-1]*(m - m/(k+1)) + a[n-2]*(m/(k+1));
+    out(happy);
+
+    // Wrong..!!
+    // ll happy = 0;
+    // while(m > 0) {
+    //     happy += k*a[n-1];
+    //     happy += a[n-2];
+    //     m -= k+1;
+    // }
+    // out(happy);
 }
 
 //=======================^============================ main =================================^=======================//
@@ -212,7 +198,7 @@ signed main() {
     // #endif
 
     ll tt = 1;
-    cin >> tt;
+    // cin >> tt;
 
     while(tt--) {
         solve(tt);

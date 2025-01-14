@@ -1,30 +1,3 @@
-// This Approach is Also True..
-// #include <iostream>
-// #include <vector>
-// using namespace std;
-
-// int main() {
-
-//     int n;
-//     cin >> n;
-
-//     vector<long long> vec(n), ans(n, 0); 
-//     for(int i=0; i<n; ++i) {
-//         cin >> vec[i];
-//     }
-//     for(int i=0; i<n; ++i) {
-//         if(vec[i]/2 == (vec[i]- vec[i]/2)) {
-//             ans[i] = vec[i]/2 - 1;
-//         } else {
-//             ans[i] = vec[i]/2;
-//         }
-//     }
-//     for(int i : ans) {
-//         cout << i << endl;
-//     }
-    
-//     return 0;
-// }
 //=======================^===================================================================^=======================//
 
 /*
@@ -50,8 +23,8 @@
 /*
     @Raj_Patel_7807
     Code By : Raj_Patel
-    Date : 14/01/2025    Time -> 10:19:10
-    Problem : 1335A
+    Date : 14/01/2025    Time -> 11:07:54
+    Problem : 1476A
 */
 
 #include <bits/stdc++.h>
@@ -194,9 +167,17 @@ inline bool checkbit(ll n, ll pos) { return n & (1LL << pos); }
 //=======================^============================ Code =================================^=======================//
 
 inline void solve(ll tt) {
-    in(ll, n);
+    inn(ll, n, k);
 
-    out((n-1)/2);
+    if(n >= k) {
+        if(n % k) {
+            out(2);
+        } else {
+            out(1);
+        }
+    } else {
+        out((k-1)/n + 1);
+    }
 }
 
 //=======================^============================ main =================================^=======================//

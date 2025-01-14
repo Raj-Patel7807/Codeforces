@@ -1,30 +1,3 @@
-// This Approach is Also True..
-// #include <iostream>
-// #include <vector>
-// using namespace std;
-
-// int main() {
-
-//     int n;
-//     cin >> n;
-
-//     vector<long long> vec(n), ans(n, 0); 
-//     for(int i=0; i<n; ++i) {
-//         cin >> vec[i];
-//     }
-//     for(int i=0; i<n; ++i) {
-//         if(vec[i]/2 == (vec[i]- vec[i]/2)) {
-//             ans[i] = vec[i]/2 - 1;
-//         } else {
-//             ans[i] = vec[i]/2;
-//         }
-//     }
-//     for(int i : ans) {
-//         cout << i << endl;
-//     }
-    
-//     return 0;
-// }
 //=======================^===================================================================^=======================//
 
 /*
@@ -50,8 +23,8 @@
 /*
     @Raj_Patel_7807
     Code By : Raj_Patel
-    Date : 14/01/2025    Time -> 10:19:10
-    Problem : 1335A
+    Date : 14/01/2025    Time -> 09:45:52
+    Problem : 1385A
 */
 
 #include <bits/stdc++.h>
@@ -194,9 +167,21 @@ inline bool checkbit(ll n, ll pos) { return n & (1LL << pos); }
 //=======================^============================ Code =================================^=======================//
 
 inline void solve(ll tt) {
-    in(ll, n);
+    innn(ll, x, y, z);
 
-    out((n-1)/2);
+    ll cnt = 0;
+    if(max({x, y, z}) == x) cnt++;
+    if(max({x, y, z}) == y) cnt++;
+    if(max({x, y, z}) == z) cnt++;
+
+    if(cnt >= 2) {
+        YES();
+        outt(min({x, y, z}));
+        outt(min({x, y, z}));
+        out(max({x, y, z}));
+    } else {
+        NO();
+    }
 }
 
 //=======================^============================ main =================================^=======================//
