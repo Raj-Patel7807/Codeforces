@@ -1,0 +1,1 @@
+{"name":"Local: 1107B","url":"d:\\Code_PlayGround\\C++\\Codeforces\\Problems\\1107B.cpp","tests":[{"id":1737095528774,"input":"3\n1 5\n5 2\n3 1\n","output":"5\n38\n19\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Code_PlayGround\\C++\\Codeforces\\Problems\\1107B.cpp","group":"local","local":true}

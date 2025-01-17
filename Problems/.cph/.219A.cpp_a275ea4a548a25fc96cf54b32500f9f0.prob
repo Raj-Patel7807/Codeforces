@@ -1,0 +1,1 @@
+{"name":"Local: 219A","url":"d:\\Code_PlayGround\\C++\\Codeforces\\Problems\\219A.cpp","tests":[{"id":1736936724063,"input":"2\naazz\n","output":"azaz"},{"id":1736936730308,"input":"3\nabcabcabz\n","output":"-1"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Code_PlayGround\\C++\\Codeforces\\Problems\\219A.cpp","group":"local","local":true}

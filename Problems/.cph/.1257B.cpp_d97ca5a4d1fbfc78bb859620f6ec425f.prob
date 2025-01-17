@@ -1,0 +1,1 @@
+{"name":"Local: 1257B","url":"d:\\Code_PlayGround\\C++\\Codeforces\\Problems\\1257B.cpp","tests":[{"id":1737105004823,"input":"7\n2 3\n1 1\n3 6\n6 8\n1 2\n4 1\n31235 6578234\n","output":"YES\nYES\nNO\nYES\nNO\nYES\nYES\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Code_PlayGround\\C++\\Codeforces\\Problems\\1257B.cpp","group":"local","local":true}

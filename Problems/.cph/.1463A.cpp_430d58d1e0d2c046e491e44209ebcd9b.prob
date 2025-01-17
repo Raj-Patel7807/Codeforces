@@ -1,0 +1,1 @@
+{"name":"Local: 1463A","url":"d:\\Code_PlayGround\\C++\\Codeforces\\Problems\\1463A.cpp","tests":[{"id":1737096914499,"input":"3\n3 2 4\n1 1 1\n10 1 7\n","output":"YES\nNO\nNO\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Code_PlayGround\\C++\\Codeforces\\Problems\\1463A.cpp","group":"local","local":true}
