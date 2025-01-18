@@ -1,0 +1,1 @@
+{"name":"Local: 802G","url":"d:\\Code_PlayGround\\C++\\Codeforces\\Problems\\802G.cpp","tests":[{"id":1737121018889,"input":"abcheaibcdi\n","output":"YES"},{"id":1737121028839,"input":"hiedi\n","output":"NO"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Code_PlayGround\\C++\\Codeforces\\Problems\\802G.cpp","group":"local","local":true}

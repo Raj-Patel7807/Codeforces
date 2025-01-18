@@ -23,8 +23,8 @@
 /*
     @Raj_Patel_7807
     Code By : Raj_Patel
-    Date : 17/01/2025    Time -> 14:43:05
-    Problem : 1204A
+    Date : 17/01/2025    Time -> 19:06:12
+    Problem : 802G
 */
 
 #include <bits/stdc++.h>
@@ -169,16 +169,16 @@ inline bool checkbit(ll n, ll pos) { return n & (1LL << pos); }
 inline void solve(ll tt) {
     in(string, s);
 
-    ll bits = (len(s)+1)/2;
-    ll ons = count(all(s), '1');
-
-    if(ons == 1 && s[0] == '1') {
-        bits = (len(s)-1)/2;
-    } else if(ons == 0) {
-        bits = 0;
+    ll n = len(s);
+    string ss = "heidi";
+    ll j = 0;
+    fo(i, 0, n-1) {
+        if(s[i] == ss[j]) {
+            j++;
+        }
     }
 
-    out(bits);
+    YES(j == 5);
 }
 
 //=======================^============================ main =================================^=======================//

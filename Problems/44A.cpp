@@ -7,7 +7,6 @@ int main() {
     cin >> n;
 
     set<pair<string, string>> st;
-    int s = n;
 
     for(int i=0; i<n; ++i) {
         string s1, s2;
