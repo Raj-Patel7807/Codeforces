@@ -1,1 +1,0 @@
-{"name":"Local: 1027a","url":"d:\\Code_PlayGround\\C++\\Codeforces\\Problems\\1027a.cpp","tests":[{"id":1737023250415,"input":"5\n6\nabccba\n2\ncf\n4\nadfa\n8\nabaazaba\n2\nml\n","output":"YES\nNO\nYES\nNO\nNO\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Code_PlayGround\\C++\\Codeforces\\Problems\\1027a.cpp","group":"local","local":true}

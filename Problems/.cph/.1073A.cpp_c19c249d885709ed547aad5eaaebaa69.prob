@@ -1,1 +1,0 @@
-{"name":"Local: 1073A","url":"d:\\Code_PlayGround\\C++\\Codeforces\\Problems\\1073A.cpp","tests":[{"id":1737011623405,"input":"10\ncodeforces","output":"YES"},{"id":1737011637927,"input":"5\naaaaa\n","output":"NO"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Code_PlayGround\\C++\\Codeforces\\Problems\\1073A.cpp","group":"local","local":true}

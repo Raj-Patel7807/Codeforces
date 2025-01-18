@@ -1,4 +1,4 @@
-//=======================^===================================================================^=======================\\
+//=======================^===================================================================^=======================//
 
 /*
 
@@ -18,13 +18,13 @@
 
 */
 
-//=======================^===================================================================^=======================\\
+//=======================^===================================================================^=======================//
 
 /*
     @Raj_Patel_7807
     Code By : Raj_Patel
-    Date : 13/01/2025    Time -> 11:22:59
-    Problem : 1438B
+    Date : 18/01/2025    Time -> 10:36:24
+    Problem : 2056A
 */
 
 #include <bits/stdc++.h>
@@ -37,6 +37,7 @@ using namespace std;
 #define rr return
 #define precision(x) cout << fixed << setprecision(x)
 
+//=======================^========================= Data Types ==============================^=======================//
 using ll = long long int;
 using db = double;
 using ld = long double;
@@ -55,20 +56,20 @@ using sl = set<ll>;
 using usl = unordered_set<ll>;
 #define int ll
 
-// Loops
+//=======================^============================ Loops ================================^=======================//
 #define fo(i, s, e) for(ll i=(s); i<=(e); ++i)
 #define foo(i, s, e, inc) for(ll i=(s); i<=(e); i+=(inc))
 #define rfo(i, s, e) for(ll i=(s); i>=(e); --i)
 #define ft(x, a) for(auto x : (a))
 #define fq(q) while((q)--)
 
-// Inputs
+//=======================^============================ Input ================================^=======================//
 #define in(type, name) type name; cin >> name;
 #define inn(type, n, k) type n, k; cin >> n >> k;
 #define innn(type, n, m, k) type n, m, k; cin >> n >> m >> k;
 #define vin(type, name, n) vector<type> name(n); for(ll i=0; i<(n); ++i) cin >> name[i];
 
-// Outputs
+//=======================^=========================== Output ================================^=======================//
 inline void YES(bool flag = true, bool small = false) {
     if(flag) { cout << (small ? "Yes\n" : "YES\n"); } else { cout << (small ? "No\n" : "NO\n"); }
 }
@@ -79,7 +80,7 @@ inline void NO(bool flag = true, bool small = false) {
 #define outt(n) cout << (n) << ' ';
 #define vout(a) for(auto x : a) { cout << x << ' '; } cout << '\n';
 
-// STL
+//=======================^============================= STL =================================^=======================//
 #define PB push_back
 #define EB emplace_back
 #define ins insert
@@ -97,7 +98,7 @@ inline void NO(bool flag = true, bool small = false) {
 #define maxid(v) max_element(v.begin(), v.end()) - v.begin()
 #define minid(v) min_element(v.begin(), v.end()) - v.begin()
 
-// Debugging
+//=======================^========================== Debugging ==============================^=======================//
 #ifndef ONLINE_JUDGE
 #define debug(x) cerr << #x << " = "; _print(x); cerr << '\n';
 #else
@@ -116,14 +117,14 @@ void _print(multiset <T> v) { cerr << "[ "; for(T i : v) {_print(i); cerr << ' '
 template <typename T, typename V>
 void _print(map <T, V> v) { cerr << "[ "; for(auto i : v) {_print(i); cerr << ' ';} cerr << "]"; }
 
-// Constants
+//=======================^========================== Constants ==============================^=======================//
 const ld PI = 3.1415926535897932384626L;
 const ld E = 2.7182818284590452353602L;
 const ll INF = 1e18 + 9;
 const ll MOD = 1e9 + 7;
 const ll MOD1 = 998244353;
 
-// Functions
+//=======================^========================== Functions ==============================^=======================//
 #define cntSetBit __builtin_popcountll
 inline ll gcd(ll a, ll b) { while(b) { a %= b; swap(a, b); } return a; }
 inline ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
@@ -163,33 +164,25 @@ inline ll onbit(ll n, ll pos) { return n | (1LL << pos); }
 inline ll offbit(ll n, ll pos) { return n & ~(1LL << pos); }
 inline bool checkbit(ll n, ll pos) { return n & (1LL << pos); }
 
-//=======================^===================================================================^=======================\\
+//=======================^============================ Code =================================^=======================//
 
 inline void solve(ll tt) {
-    in(ll, n);
-    vin(ll, a, n);
+    inn(ll, n, m);
+    vpl a(n);
 
-    vl p(n);
-    ll psum = 0;
+    ll peri = 4*n*m;
+    ll minus = 0;
     fo(i, 0, n-1) {
-        p[i] = power(2, a[i]);
-        psum += p[i];
-    }
-
-    sortall(p);
-    debug(p);
-
-    ll sum = 0;
-    fo(i, 0, n-1) {
-        sum += p[i];
-        if(2*sum == psum) {
-            YES();
-            rr;
+        cin >> a[i].FF >> a[i].SS;
+        if(i != 0) {
+            minus += 2*(m-a[i].FF + m-a[i].SS);
         }
     }
 
-    NO();
+    out(peri - minus);
 }
+
+//=======================^============================ main =================================^=======================//
 
 signed main() {
 
