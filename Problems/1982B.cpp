@@ -178,7 +178,7 @@ inline bool checkbit(ll n, ll pos) { return n & (1LL << pos); }
 inline void solve(ll tt) {
     innn(ll, x, y, k);
 
-    while(k > 0) {
+    while(k > 0 && x != 1) {
         debug(y - (x % y));
         debug(k);
         if(x % y == 0) {
