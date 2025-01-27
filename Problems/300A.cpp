@@ -179,46 +179,100 @@ inline void solve(ll tt) {
     in(ll, n);
     vin(ll, a, n);
 
-    ll temp1 = 0;
+    ll pos = 0;
+    fo(i, 0, n-1) {
+        if(a[i] > 0) {
+            pos++;
+        }
+    }
+
     outt(1);
+    ll temp1, temp2, temp3;
     fo(i, 0, n-1) {
         if(a[i] < 0) {
             out(a[i]);
             temp1 = i;
+            temp2 = i;
+            temp3 = i;
             break;
         }
     }
 
-    vl p;
-    fo(i, 0, n-1) {
-        if(a[i] > 0) {
-            p.PB(a[i]);
-            break;
-        }
-    }
-    debug(p);
-
-    if(!len(p)) {
+    if(pos == 0) {
+        outt(2);
         ll cnt = 0;
         fo(i, 0, n-1) {
-            if(i != temp1 && cnt < 2 && a[i] < 0) {
-                p.PB(a[i]);
+            if(cnt == 0 && i != temp1 && a[i] < 0) {
+                outt(a[i]);
+                temp2 = i;
                 cnt++;
+            } else if(cnt == 1 && i != temp1 && a[i] < 0) {
+                out(a[i]);
+                temp3 = i;
+                break;
             }
         }
+        outt(n-3);
+    } else {
+        outt(1);
+        fo(i, 0, n-1) {
+            if(a[i] > 0) {
+                out(a[i]);
+                temp2 = i;
+                break;
+            }
+        }
+        outt(n-2);
     }
-    debug(p);
 
-    outt(len(p));
-    vout(p);
-
-    outt(n-len(p)-1);
     fo(i, 0, n-1) {
-        if(i != temp1 && find(all(p), a[i]) == p.end()) {
+        if(i != temp1 && i != temp2 && i != temp3) {
             outt(a[i]);
         }
     }
     out("");
+
+    // This is Also Right Approach..
+    // ll temp1 = 0;
+    // outt(1);
+    // fo(i, 0, n-1) {
+    //     if(a[i] < 0) {
+    //         out(a[i]);
+    //         temp1 = i;
+    //         break;
+    //     }
+    // }
+
+    // vl p;
+    // fo(i, 0, n-1) {
+    //     if(a[i] > 0) {
+    //         p.PB(a[i]);
+    //         break;
+    //     }
+    // }
+    // debug(p);
+
+    // if(!len(p)) {
+    //     ll cnt = 0;
+    //     fo(i, 0, n-1) {
+    //         if(i != temp1 && cnt < 2 && a[i] < 0) {
+    //             p.PB(a[i]);
+    //             cnt++;
+    //         }
+    //     }
+    // }
+    // debug(p);
+
+    // outt(len(p));
+    // vout(p);
+
+    // outt(n-len(p)-1);
+    // fo(i, 0, n-1) {
+    //     if(i != temp1 && find(all(p), a[i]) == p.end()) {
+    //         outt(a[i]);
+    //     }
+    // }
+    // out("");
 }
 
 //=======================^============================ main =================================^=======================//
