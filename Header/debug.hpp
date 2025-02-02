@@ -3,7 +3,25 @@
 
 #include <bits/stdc++.h>
 
-#define debug(x) cerr << #x << " = "; debug_print(x); cerr << '\n';
+#define debug1(a) cerr << #a << " = "; debug_print(a); cerr << '\n';
+#define debug2(a, b) cerr << #a << " = "; debug_print(a); cerr << '\n'; \
+                     cerr << #b << " = "; debug_print(b); cerr << '\n';
+#define debug3(a, b, c) cerr << #a << " = "; debug_print(a); cerr << '\n'; \
+                        cerr << #b << " = "; debug_print(b); cerr << '\n'; \
+                        cerr << #c << " = "; debug_print(c); cerr << '\n';
+#define debug4(a, b, c, d) cerr << #a << " = "; debug_print(a); cerr << '\n'; \
+                           cerr << #b << " = "; debug_print(b); cerr << '\n'; \
+                           cerr << #c << " = "; debug_print(c); cerr << '\n'; \
+                           cerr << #d << " = "; debug_print(d); cerr << '\n';
+#define debug5(a, b, c, d, e) cerr << #a << " = "; debug_print(a); cerr << '\n'; \
+                              cerr << #b << " = "; debug_print(b); cerr << '\n'; \
+                              cerr << #c << " = "; debug_print(c); cerr << '\n'; \
+                              cerr << #d << " = "; debug_print(d); cerr << '\n'; \
+                              cerr << #e << " = "; debug_print(e); cerr << '\n';
+
+#define GET_DEBUG(a, b, c, d, e, NAME, ...) NAME
+#define debug(...) GET_DEBUG(__VA_ARGS__, debug5, debug4, debug3, debug2, debug1)(__VA_ARGS__)
+
 
 template <typename T> void debug_print(T t);
 template <typename T, typename V> void debug_print(pair<T, V> p);
