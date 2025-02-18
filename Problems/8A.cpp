@@ -88,7 +88,7 @@ const ll MOD = 1e9 + 7;
 const ll MOD1 = 998244353;
 
 inline ll TT(bool flag = false) { ll tt = 1; if(flag) { cin >> tt; } return tt; }
-inline void SETUP_IO(bool FILE_IO = false) {
+inline void SETUP_IO(bool FILE_IO = true) {
     ios_base :: sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
     if(FILE_IO) {
         #ifndef ONLINE_JUDGE
@@ -129,7 +129,27 @@ inline ll moddiv(ll a, ll b, ll mod = MOD) { return modmult(a, modinv(b, mod), m
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    
+    IN(string, s, a, b);
+
+    auto fa = s.find(a);
+    auto fb = s.find(b, fa + LEN(a));
+
+    reverse(all(s));
+    auto ba = s.find(a);
+    auto bb = s.find(b, ba + LEN(a));
+
+    bool fw = (fa != string::npos) && (fb != string::npos);
+    bool bc = (ba != string::npos) && (bb != string::npos);
+
+    if(fw && bc) {
+        OUT("both");
+    } else if(fw) {
+        OUT("forward");
+    } else if(bc) {
+        OUT("backward");
+    } else {
+        OUT("fantasy");
+    }
 }
 
 signed main() {

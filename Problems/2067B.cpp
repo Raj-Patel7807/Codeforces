@@ -88,7 +88,7 @@ const ll MOD = 1e9 + 7;
 const ll MOD1 = 998244353;
 
 inline ll TT(bool flag = false) { ll tt = 1; if(flag) { cin >> tt; } return tt; }
-inline void SETUP_IO(bool FILE_IO = false) {
+inline void SETUP_IO(bool FILE_IO = true) {
     ios_base :: sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
     if(FILE_IO) {
         #ifndef ONLINE_JUDGE
@@ -129,13 +129,49 @@ inline ll moddiv(ll a, ll b, ll mod = MOD) { return modmult(a, modinv(b, mod), m
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    
+    IN(ll, n);
+    VIN(ll, a, n);
+
+    vl b(1001, 0), c(1001, 0);
+
+    FOR(n) {
+        b[a[i]]++;
+    }
+
+    FOR(1000) {
+        if(b[i] >= 2) {
+            b[i+1] += b[i] - 2;
+            b[i] = 1;
+            c[i] = 1;
+        }
+    }
+
+    FOR(1000) {
+        if(b[i] != c[i]) {
+            NO(1, 1);
+            return;
+        }
+    }
+    YES(1, 1);
+
+    // This Approach is Also Right..
+    // ssort(a);
+
+    // ll mx = 0;
+    // FOR(i, 0, n-1, 2) {
+    //     if(max(mx, a[i]) != max(mx, a[i+1])) {
+    //         NO(1, 1);
+    //         return;
+    //     }
+    //     mx = max(mx, a[i]) + 1;
+    // }
+    // YES(1, 1);
 }
 
 signed main() {
     SETUP_IO();
 
-    ll tt = TT();
+    ll tt = TT(1);
     FOR(i, tt) solve(i);
 
     return 0;

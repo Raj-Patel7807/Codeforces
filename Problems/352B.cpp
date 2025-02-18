@@ -88,7 +88,7 @@ const ll MOD = 1e9 + 7;
 const ll MOD1 = 998244353;
 
 inline ll TT(bool flag = false) { ll tt = 1; if(flag) { cin >> tt; } return tt; }
-inline void SETUP_IO(bool FILE_IO = false) {
+inline void SETUP_IO(bool FILE_IO = true) {
     ios_base :: sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
     if(FILE_IO) {
         #ifndef ONLINE_JUDGE
@@ -129,7 +129,42 @@ inline ll moddiv(ll a, ll b, ll mod = MOD) { return modmult(a, modinv(b, mod), m
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    
+    IN(ll, n);
+    VIN(ll, a, n);
+
+    map<ll, vl> mp;
+    FOR(n) {
+        mp[a[i]].PB(i);
+    }
+    debug(mp);
+
+    vc<pl> v;
+    FORE(i, mp) {
+        debug(i.SS);
+        if(LEN(i.SS) == 1) {
+            v.PB(MP(i.FF, 0));
+        } else {
+            bool flag = true;
+            ll curdif = i.SS[1] - i.SS[0];
+            debug(curdif);
+            FOR(j, LEN(i.SS)-1) {
+                debug(i.SS[j+1] - i.SS[j]);
+                if(i.SS[j+1] - i.SS[j] != curdif) {
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag) {
+                v.PB(MP(i.FF, curdif));
+            }
+        }
+    }
+
+    OUT(LEN(v));
+    FOR(LEN(v)) {
+        OUTT(v[i].FF, v[i].SS);
+        ln;
+    }
 }
 
 signed main() {

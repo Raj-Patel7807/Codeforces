@@ -88,7 +88,7 @@ const ll MOD = 1e9 + 7;
 const ll MOD1 = 998244353;
 
 inline ll TT(bool flag = false) { ll tt = 1; if(flag) { cin >> tt; } return tt; }
-inline void SETUP_IO(bool FILE_IO = false) {
+inline void SETUP_IO(bool FILE_IO = true) {
     ios_base :: sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
     if(FILE_IO) {
         #ifndef ONLINE_JUDGE
@@ -129,7 +129,32 @@ inline ll moddiv(ll a, ll b, ll mod = MOD) { return modmult(a, modinv(b, mod), m
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    
+    IN(string, s, t);
+    ll n = LEN(s), m = LEN(t);
+
+    map<char, ll> mp, mpp;
+    FOR(n) mp[s[i]]++;
+    FOR(m) mpp[t[i]]++;
+    debug(mp, mpp);
+
+    FORE(i, mpp) {
+        if(mp[i.FF] < i.SS) {
+            OUT("need tree");
+            return;
+        }
+    }
+    if(n == m) {
+        OUT("array");
+        return;
+    }
+
+    ll j = 0;
+    FOR(n) if(j < m && s[i] == t[j]) j++;
+    if(j == m) {
+        OUT("automaton");
+    } else {
+        OUT("both");
+    }
 }
 
 signed main() {

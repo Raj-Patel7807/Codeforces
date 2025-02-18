@@ -88,7 +88,7 @@ const ll MOD = 1e9 + 7;
 const ll MOD1 = 998244353;
 
 inline ll TT(bool flag = false) { ll tt = 1; if(flag) { cin >> tt; } return tt; }
-inline void SETUP_IO(bool FILE_IO = false) {
+inline void SETUP_IO(bool FILE_IO = true) {
     ios_base :: sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
     if(FILE_IO) {
         #ifndef ONLINE_JUDGE
@@ -129,7 +129,35 @@ inline ll moddiv(ll a, ll b, ll mod = MOD) { return modmult(a, modinv(b, mod), m
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    
+    VVIN(char, s, 3, 3);
+
+    string ans = "ZZZ";
+
+    auto adj = [&](ll a, ll b, ll x, ll y) {
+        return ((a != x || b != y) && abs(a - x) <= 1 && abs(b - y) <= 1);
+    };
+
+    FOR(i, 0, 3) {
+        FOR(j, 0, 3) {
+            FOR(k, 0, 3) {
+                FOR(l, 0, 3) {
+                    if(!adj(i, j, k, l)) {
+                        continue;
+                    }
+                    FOR(m, 0, 3) {
+                        FOR(n, 0, 3) {
+                            if(!adj(k, l, m, n) || (i == m && j == n)) {
+                                continue;
+                            }
+                            string cur = {s[i][j], s[k][l], s[m][n]};
+                            ans = min(ans, cur);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    OUT(ans);
 }
 
 signed main() {

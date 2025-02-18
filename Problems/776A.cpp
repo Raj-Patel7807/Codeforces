@@ -88,7 +88,7 @@ const ll MOD = 1e9 + 7;
 const ll MOD1 = 998244353;
 
 inline ll TT(bool flag = false) { ll tt = 1; if(flag) { cin >> tt; } return tt; }
-inline void SETUP_IO(bool FILE_IO = false) {
+inline void SETUP_IO(bool FILE_IO = true) {
     ios_base :: sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
     if(FILE_IO) {
         #ifndef ONLINE_JUDGE
@@ -129,7 +129,29 @@ inline ll moddiv(ll a, ll b, ll mod = MOD) { return modmult(a, modinv(b, mod), m
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    
+    pair<string, string> s;
+    cin >> s.FF >> s.SS;
+
+    IN(ll, n);
+
+    vc<pair<string, string>> v(n);
+    FOR(n) {
+        cin >> v[i].FF >> v[i].SS;
+    }
+
+    OUTT(s.FF, s.SS); ln;
+    FOR(n) {
+        if(v[i].FF == s.FF) {
+            s.FF = v[i].SS;
+        } else if(v[i].SS == s.FF) {
+            s.FF = v[i].FF;
+        } else if(v[i].FF == s.SS) {
+            s.SS = v[i].SS;
+        } else {
+            s.SS = v[i].FF;
+        }
+        OUTT(s.FF, s.SS); ln;
+    }
 }
 
 signed main() {
