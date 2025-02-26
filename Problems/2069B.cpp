@@ -40,9 +40,9 @@ using idset = tree<ll, null_type,less<ll>, rb_tree_tag,tree_order_statistics_nod
 #define FOR2(i, s) for(ll i=0; i<(s); ++i)
 #define FOR3(i, s, e) for(ll i=(s); i<(e); ++i)
 #define FOR4(i, s, e, inc) for(ll i=(s); i<(e); i+=(inc))
-#define FORR1(s) for(ll i=(s)-1; i>=0; --i)
-#define FORR2(i, s) for(ll i=(s)-1; i>=0; --i)
-#define FORR3(i, s, e) for(ll i=(s)-1; i>=(e); --i)
+#define FORR1(s) for(ll i=(s); i>=0; --i)
+#define FORR2(i, s) for(ll i=(s); i>=0; --i)
+#define FORR3(i, s, e) for(ll i=(s); i>=(e); --i)
 #define GET_FOR(a, b, c, d, LOOP, ...) LOOP
 #define GET_FORR(a, b, c, LOOP, ...) LOOP
 #define FOR(...) GET_FOR(__VA_ARGS__, FOR4, FOR3, FOR2, FOR1)(__VA_ARGS__)
@@ -88,7 +88,7 @@ const ll MOD = 1e9 + 7;
 const ll MOD1 = 998244353;
 
 inline ll TT(bool flag = false) { ll tt = 1; if(flag) { cin >> tt; } return tt; }
-inline void SETUP_IO(bool FILE_IO = false) {
+inline void SETUP_IO(bool FILE_IO = true) {
     ios_base :: sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
     if(FILE_IO) {
         #ifndef ONLINE_JUDGE
@@ -120,46 +120,36 @@ inline void factorial(ll n, vector<ll>& a) { a.resize(n+1, 1); for(ll i=1; i<=n;
 inline bool isPowOfTwo(ll n) { return ((n > 0) && !(n & (n-1))); }
 inline bool isPerfectSq(ll n) { if(n < 0) return false; ll sr = static_cast<ll>(sqrt(n)); return (sr*sr == n); }
 inline bool compbyss(const pair<ll, ll>& a, const pair<ll, ll>& b) { return a.second < b.second; }
+inline ll msbPos(ll n) { if(n == 0) { return -1; } return (63 - (__builtin_clzll(n))); }
 inline ll modadd(ll a, ll b, ll mod = MOD) { return ((a % mod + b % mod) % mod); }
 inline ll modmult(ll a, ll b, ll mod = MOD) { return ((a % mod * b % mod) % mod); }
 inline ll modinv(ll a, ll mod = MOD) { return power(a, mod-2, mod); }
 inline ll moddiv(ll a, ll b, ll mod = MOD) { return modmult(a, modinv(b, mod), mod); }
-inline ll msbPos(ll n) { if(n == 0) { return -1; } return (63 - (__builtin_clzll(n))); }
-inline ll getBit(ll n, ll pos) { return ((n >> pos) & 1); }
-inline ll setBit(ll n, ll pos) { return (n | (1 << pos)); }
-inline ll clearBit(ll n, ll pos) { return (n & (~(1 << pos))); }
-inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    IN(ll, n);
-    VIN(ll, a, n);
-    
-    if(n == 2) {
-        OUT(maxval(a) - minval(a));
-        return;
+    IN(ll, n, m);
+    VVIN(ll, a, n, m);
+
+    umap<ll, ll> mp;
+    FOR(i, n) FOR(j, m) if(mp[a[i][j]] == 0) mp[a[i][j]]++;
+    debug(mp);
+
+    FOR(i, n) FOR(j, m) {
+        if(i != 0 && a[i-1][j] == a[i][j]) mp[a[i][j]] = 2;
+        if(i != n-1 && a[i+1][j] == a[i][j]) mp[a[i][j]] = 2;
+        if(j != 0 && a[i][j-1] == a[i][j]) mp[a[i][j]] = 2;
+        if(j != m-1 && a[i][j+1] == a[i][j]) mp[a[i][j]] = 2;
     }
-    
-    FOR(i, 1, n-1) {
-        if(a[i] > a[i-1] && a[i] <= a[i+1]) {
-            a[i] = 0;
-        } else if(a[i] > a[i-1] && a[i] > a[i+1]) {
-            a[i] -= a[i-1];
-        } else if(a[i] < a[i-1] && a[i] > a[i+1]) {
-            a[i] -= a[i+1];
-        } else if(a[i] <= a[i-1] && a[i] < a[i+1]) {
-            a[i] = max(a[i-1], a[i+1]);
-            debug(a[i]);
-            i+=2;
-        } else if(a[i] == a[i-1] && a[i-1] == a[i+1]) {
-            a[i] = 0;
-        }
-        debug(a);
+
+    ll ans = 0, mx = 0;
+    FORE(i, mp) {
+        ans += i.SS;
+        mx = max(mx, i.SS);
     }
-    debug(tt, a[n-2]);
-    
-    OUT(abs(a[n-1] - a[n-2]));
+
+    OUT(ans - mx);
 }
 
 signed main() {

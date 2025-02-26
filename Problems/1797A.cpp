@@ -88,7 +88,7 @@ const ll MOD = 1e9 + 7;
 const ll MOD1 = 998244353;
 
 inline ll TT(bool flag = false) { ll tt = 1; if(flag) { cin >> tt; } return tt; }
-inline void SETUP_IO(bool FILE_IO = false) {
+inline void SETUP_IO(bool FILE_IO = true) {
     ios_base :: sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
     if(FILE_IO) {
         #ifndef ONLINE_JUDGE
@@ -133,33 +133,27 @@ inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    IN(ll, n);
-    VIN(ll, a, n);
-    
-    if(n == 2) {
-        OUT(maxval(a) - minval(a));
-        return;
+    IN(ll, n, m, x1, y1, x2, y2);
+
+    pl ans;
+    if((x1 == 1 && y1 == 1) || (x1 == n && y1 == m) || (x1 == n && y1 == 1) || (x1 == 1 && y1 == m)) {
+        ans.FF = 2;
+    } else if((x1 == 1 || y1 == 1) || (x1 == n || y1 == m)) {
+        ans.FF = 3;
+    } else {
+        ans.FF = 4;
     }
-    
-    FOR(i, 1, n-1) {
-        if(a[i] > a[i-1] && a[i] <= a[i+1]) {
-            a[i] = 0;
-        } else if(a[i] > a[i-1] && a[i] > a[i+1]) {
-            a[i] -= a[i-1];
-        } else if(a[i] < a[i-1] && a[i] > a[i+1]) {
-            a[i] -= a[i+1];
-        } else if(a[i] <= a[i-1] && a[i] < a[i+1]) {
-            a[i] = max(a[i-1], a[i+1]);
-            debug(a[i]);
-            i+=2;
-        } else if(a[i] == a[i-1] && a[i-1] == a[i+1]) {
-            a[i] = 0;
-        }
-        debug(a);
+
+    if((x2 == 1 && y2 == 1) || (x2 == n && y2 == m) || (x2 == n && y2 == 1) || (x2 == 1 && y2 == m)) {
+        ans.SS = 2;
+    } else if((x2 == 1 || y2 == 1) || (x2 == n || y2 == m)) {
+        ans.SS = 3;
+    } else {
+        ans.SS = 4;
     }
-    debug(tt, a[n-2]);
-    
-    OUT(abs(a[n-1] - a[n-2]));
+    debug(ans);
+
+    OUT(min(ans.FF, ans.SS));
 }
 
 signed main() {

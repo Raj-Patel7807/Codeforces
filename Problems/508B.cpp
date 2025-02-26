@@ -88,7 +88,7 @@ const ll MOD = 1e9 + 7;
 const ll MOD1 = 998244353;
 
 inline ll TT(bool flag = false) { ll tt = 1; if(flag) { cin >> tt; } return tt; }
-inline void SETUP_IO(bool FILE_IO = false) {
+inline void SETUP_IO(bool FILE_IO = true) {
     ios_base :: sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
     if(FILE_IO) {
         #ifndef ONLINE_JUDGE
@@ -133,39 +133,24 @@ inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    IN(ll, n);
-    VIN(ll, a, n);
-    
-    if(n == 2) {
-        OUT(maxval(a) - minval(a));
-        return;
+    IN(string, s);
+
+    char eve = 127; ll evid = -1;
+    FOR(LEN(s)) if(!((s[i]-'0') & 1)) {
+        if(s[i] < s[LEN(s)-1]) { evid = i; break; } evid = i;
     }
-    
-    FOR(i, 1, n-1) {
-        if(a[i] > a[i-1] && a[i] <= a[i+1]) {
-            a[i] = 0;
-        } else if(a[i] > a[i-1] && a[i] > a[i+1]) {
-            a[i] -= a[i-1];
-        } else if(a[i] < a[i-1] && a[i] > a[i+1]) {
-            a[i] -= a[i+1];
-        } else if(a[i] <= a[i-1] && a[i] < a[i+1]) {
-            a[i] = max(a[i-1], a[i+1]);
-            debug(a[i]);
-            i+=2;
-        } else if(a[i] == a[i-1] && a[i-1] == a[i+1]) {
-            a[i] = 0;
-        }
-        debug(a);
-    }
-    debug(tt, a[n-2]);
-    
-    OUT(abs(a[n-1] - a[n-2]));
+    debug(evid);
+
+    if(evid == -1) { OUT(-1); return; }
+
+    swap(s[evid], s[LEN(s)-1]);
+    OUT(s);
 }
 
 signed main() {
     SETUP_IO();
 
-    ll tt = TT(1);
+    ll tt = TT();
     FOR(i, tt) solve(i);
 
     return 0;

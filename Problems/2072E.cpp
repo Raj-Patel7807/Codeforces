@@ -88,7 +88,7 @@ const ll MOD = 1e9 + 7;
 const ll MOD1 = 998244353;
 
 inline ll TT(bool flag = false) { ll tt = 1; if(flag) { cin >> tt; } return tt; }
-inline void SETUP_IO(bool FILE_IO = false) {
+inline void SETUP_IO(bool FILE_IO = true) {
     ios_base :: sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
     if(FILE_IO) {
         #ifndef ONLINE_JUDGE
@@ -132,39 +132,65 @@ inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
+vl sum;
+void preComp() {
+    ll n = 0, s = 0;
+    while(s <= 1e6) {
+        s = (n*(n-1))/2;
+        sum.PB(s);
+        n++;
+    }
+    return;
+}
+
 inline void solve(ll tt) {
     IN(ll, n);
-    VIN(ll, a, n);
-    
-    if(n == 2) {
-        OUT(maxval(a) - minval(a));
+
+    if(n == 0) {
+        OUT(1); OUTT(0, 0); ln;
         return;
     }
-    
-    FOR(i, 1, n-1) {
-        if(a[i] > a[i-1] && a[i] <= a[i+1]) {
-            a[i] = 0;
-        } else if(a[i] > a[i-1] && a[i] > a[i+1]) {
-            a[i] -= a[i-1];
-        } else if(a[i] < a[i-1] && a[i] > a[i+1]) {
-            a[i] -= a[i+1];
-        } else if(a[i] <= a[i-1] && a[i] < a[i+1]) {
-            a[i] = max(a[i-1], a[i+1]);
-            debug(a[i]);
-            i+=2;
-        } else if(a[i] == a[i-1] && a[i-1] == a[i+1]) {
-            a[i] = 0;
+
+    vc<pl> vp;
+    ll x = 1, y = 1;
+    while(n > 0) {
+        ll c = 0;
+
+        // Optimal; // Binary Search;
+        ll s = 0, e = LEN(sum), mid;
+
+        while(s <= e) {
+            mid = s + (e - s)/2;
+            if(sum[mid] <= n) {
+                c = mid;
+                s = mid + 1;
+            } else {
+                e = mid - 1;
+            }
         }
-        debug(a);
+
+        // // This is Also Right; // Linear Search;
+        // FOR(LEN(sum)) {
+        //     if(sum[i] <= n) c = i;
+        //     else break;
+        // }
+
+        n -= sum[c];
+        FOR(c) {
+            vp.PB(MP(x, y));
+            y++;
+        }
+        x++;
     }
-    debug(tt, a[n-2]);
-    
-    OUT(abs(a[n-1] - a[n-2]));
+
+    OUT(LEN(vp));
+    FORE(i, vp) { OUTT(i.FF, i.SS); ln; }
 }
 
 signed main() {
     SETUP_IO();
 
+    preComp();
     ll tt = TT(1);
     FOR(i, tt) solve(i);
 

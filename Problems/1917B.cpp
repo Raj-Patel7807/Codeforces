@@ -88,7 +88,7 @@ const ll MOD = 1e9 + 7;
 const ll MOD1 = 998244353;
 
 inline ll TT(bool flag = false) { ll tt = 1; if(flag) { cin >> tt; } return tt; }
-inline void SETUP_IO(bool FILE_IO = false) {
+inline void SETUP_IO(bool FILE_IO = true) {
     ios_base :: sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
     if(FILE_IO) {
         #ifndef ONLINE_JUDGE
@@ -134,32 +134,14 @@ inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 
 inline void solve(ll tt) {
     IN(ll, n);
-    VIN(ll, a, n);
-    
-    if(n == 2) {
-        OUT(maxval(a) - minval(a));
-        return;
+    IN(string, s);
+
+    ll ans = n;
+    FOR(i, n) FOR(j, i+1, n) {
+        if(i != j && s[i] != s[j]) ans++;
+        else break;
     }
-    
-    FOR(i, 1, n-1) {
-        if(a[i] > a[i-1] && a[i] <= a[i+1]) {
-            a[i] = 0;
-        } else if(a[i] > a[i-1] && a[i] > a[i+1]) {
-            a[i] -= a[i-1];
-        } else if(a[i] < a[i-1] && a[i] > a[i+1]) {
-            a[i] -= a[i+1];
-        } else if(a[i] <= a[i-1] && a[i] < a[i+1]) {
-            a[i] = max(a[i-1], a[i+1]);
-            debug(a[i]);
-            i+=2;
-        } else if(a[i] == a[i-1] && a[i-1] == a[i+1]) {
-            a[i] = 0;
-        }
-        debug(a);
-    }
-    debug(tt, a[n-2]);
-    
-    OUT(abs(a[n-1] - a[n-2]));
+    OUT(ans);
 }
 
 signed main() {

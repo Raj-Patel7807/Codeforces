@@ -81,14 +81,14 @@ inline void NO(bool F = true, bool S = false) { cout << (F ? (S ? "No\n" : "NO\n
 #define maxid(v) max_element((v).begin(), (v).end()) - ((v).begin())
 #define minid(v) min_element((v).begin(), (v).end()) - ((v).begin())
 
-const ld PI = 3.1415926535897932384626L;
+const ld PI = 3.14159265358979323846264338327L;
 const ld E = 2.7182818284590452353602L;
 const ll INF = 1e18 + 9;
 const ll MOD = 1e9 + 7;
 const ll MOD1 = 998244353;
 
 inline ll TT(bool flag = false) { ll tt = 1; if(flag) { cin >> tt; } return tt; }
-inline void SETUP_IO(bool FILE_IO = false) {
+inline void SETUP_IO(bool FILE_IO = true) {
     ios_base :: sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
     if(FILE_IO) {
         #ifndef ONLINE_JUDGE
@@ -133,33 +133,15 @@ inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    IN(ll, n);
-    VIN(ll, a, n);
-    
-    if(n == 2) {
-        OUT(maxval(a) - minval(a));
-        return;
+    string pi = "314159265358979323846264338327";
+    IN(string, s);
+
+    ll ans = 0;
+    FOR(LEN(s)) {
+        if(s[i] == pi[i]) ans++;
+        else break;
     }
-    
-    FOR(i, 1, n-1) {
-        if(a[i] > a[i-1] && a[i] <= a[i+1]) {
-            a[i] = 0;
-        } else if(a[i] > a[i-1] && a[i] > a[i+1]) {
-            a[i] -= a[i-1];
-        } else if(a[i] < a[i-1] && a[i] > a[i+1]) {
-            a[i] -= a[i+1];
-        } else if(a[i] <= a[i-1] && a[i] < a[i+1]) {
-            a[i] = max(a[i-1], a[i+1]);
-            debug(a[i]);
-            i+=2;
-        } else if(a[i] == a[i-1] && a[i-1] == a[i+1]) {
-            a[i] = 0;
-        }
-        debug(a);
-    }
-    debug(tt, a[n-2]);
-    
-    OUT(abs(a[n-1] - a[n-2]));
+    OUT(ans);
 }
 
 signed main() {
