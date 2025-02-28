@@ -21,9 +21,12 @@ using ll = long long int;
 using ull = unsigned long long int;
 using db = double;
 using ld = long double;
-template <typename T, typename V> using pr = pair<T, V>;
+using vl = vector<ll>;
+using pl = pair<ll, ll>;
+using ml = map<ll, ll>;
 template <typename T> using vc = vector<T>;
 template <typename T> using vvc = vector<vector<T>>;
+template <typename T, typename V> using vcp = vector<pair<T, V>>;
 template <typename T, typename V> using umap = unordered_map<T, V>;
 template <typename T> using uset = unordered_set<T>;
 template <typename T> using stk = stack<T>;
@@ -130,25 +133,27 @@ inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    IN(ll, n);
-    IN(string, s);
+    IN(ll, n, q); IN(string, s);
 
-    ll cnt = 0, ans = 0;
-    FOR(i, n-2) {
-        if(s[i] == '1' && s[i+1] == '0' && s[i+2] == '1') {
-            cnt++; i++;
-        } else {
-            ans += (cnt)*(cnt+1)/2;
-            cnt = 0;
-        }
+    vc<ll> pre(n+1, 0);
+    FOR(i, 1, n+1) pre[i] = pre[i-1] + (s[i-1] - '0');
+    debug(pre);
+
+    FOR(q) {
+        IN(ll, l1, r1, l2, r2, r);
+
+        ll a = (pre[r1] - pre[l1-1]) % 9;
+        ll b = (pre[r2] - pre[l2-1]) % 9;
+        debug(a, b);
+
+        YES((a * b) % 9 == r);
     }
-    OUT(ans + (cnt)*(cnt+1)/2);
 }
 
 signed main() {
     SETUP_IO();
 
-    ll tt = TT(1);
+    ll tt = TT();
     FOR(i, tt) solve(i);
 
     return 0;

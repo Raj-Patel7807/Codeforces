@@ -40,10 +40,10 @@ using idset = tree<ll, null_type,less<ll>, rb_tree_tag,tree_order_statistics_nod
 #define FORR1(s) for(ll i=(s)-1; i>=0; --i)
 #define FORR2(i, s) for(ll i=(s)-1; i>=0; --i)
 #define FORR3(i, s, e) for(ll i=(s)-1; i>=(e); --i)
+#define FORR4(i, s, e, dec) for(ll i=(s)-1; i>=e; i-=dec)
 #define GET_FOR(a, b, c, d, LOOP, ...) LOOP
-#define GET_FORR(a, b, c, LOOP, ...) LOOP
 #define FOR(...) GET_FOR(__VA_ARGS__, FOR4, FOR3, FOR2, FOR1)(__VA_ARGS__)
-#define FORR(...) GET_FORR(__VA_ARGS__, FORR3, FORR2, FORR1)(__VA_ARGS__)
+#define FORR(...) GET_FOR(__VA_ARGS__, FORR4, FORR3, FORR2, FORR1)(__VA_ARGS__)
 #define FORE(x, a) for(auto& x : (a))
 
 template <typename... T> inline void INPUT(T&... args) { ((cin >> args), ...); }
@@ -130,19 +130,28 @@ inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    IN(ll, n);
-    IN(string, s);
+    IN(ll, n, s, T, x, y);
+    VIN(ll, a, n);
+    VIN(ll, b, n);
+    VIN(ll, k, n);
 
-    ll cnt = 0, ans = 0;
-    FOR(i, n-2) {
-        if(s[i] == '1' && s[i+1] == '0' && s[i+2] == '1') {
-            cnt++; i++;
-        } else {
-            ans += (cnt)*(cnt+1)/2;
-            cnt = 0;
+    ll ans = 0;
+    vc<pr<ll, pr<ll, ll>>> ar;
+
+    FOR(n) {
+        ll t = (abs(x - a[i]) + abs(y - b[i])) * s;
+        ar.PB(MP(2*t + k[i], MP(t + k[i], t)));
+    }
+
+    ssort(ar);
+
+    FOR(n) {
+        if(T >= ar[i].SS.FF) {
+            T -= ar[i].SS.FF + ar[i].SS.SS;
+            ans++;
         }
     }
-    OUT(ans + (cnt)*(cnt+1)/2);
+    OUT(ans);
 }
 
 signed main() {

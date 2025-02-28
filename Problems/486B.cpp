@@ -12,7 +12,7 @@ using namespace __gnu_pbds;
 using namespace std;
 
 #ifndef ONLINE_JUDGE
-    #include "D:/Code_PlayGround/C++/Header/debug.hpp"
+    #include "../Header/debug.hpp"
 #else
     #define debug(...) 7807
 #endif
@@ -21,9 +21,12 @@ using ll = long long int;
 using ull = unsigned long long int;
 using db = double;
 using ld = long double;
-template <typename T, typename V> using pr = pair<T, V>;
+using vl = vector<ll>;
+using pl = pair<ll, ll>;
+using ml = map<ll, ll>;
 template <typename T> using vc = vector<T>;
 template <typename T> using vvc = vector<vector<T>>;
+template <typename T, typename V> using vcp = vector<pair<T, V>>;
 template <typename T, typename V> using umap = unordered_map<T, V>;
 template <typename T> using uset = unordered_set<T>;
 template <typename T> using stk = stack<T>;
@@ -89,9 +92,9 @@ inline void SETUP_IO(bool FILE_IO = true) {
     ios_base :: sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
     if(FILE_IO) {
         #ifndef ONLINE_JUDGE
-            freopen("D:/Code_PlayGround/C++/Input.txt", "r", stdin);
-            freopen("D:/Code_PlayGround/C++/Output.txt", "w", stdout);
-            freopen("D:/Code_PlayGround/C++/Debug.txt", "w", stderr);
+            freopen("Input.txt", "r", stdin);
+            freopen("Output.txt", "w", stdout);
+            freopen("Debug.txt", "w", stderr);
         #endif
     }
 }
@@ -130,25 +133,39 @@ inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    IN(ll, n);
-    IN(string, s);
+    IN(ll, n, m);
+    VVIN(ll, a, n, m);
 
-    ll cnt = 0, ans = 0;
-    FOR(i, n-2) {
-        if(s[i] == '1' && s[i+1] == '0' && s[i+2] == '1') {
-            cnt++; i++;
-        } else {
-            ans += (cnt)*(cnt+1)/2;
-            cnt = 0;
+    vc<vl> v(n, vl(m, 1));
+    FOR(i, n) FOR(j, m) {
+        if(a[i][j] == 0) {
+            FOR(k, n) v[k][j] = 0;
+            FOR(k, m) v[i][k] = 0;
         }
     }
-    OUT(ans + (cnt)*(cnt+1)/2);
+
+    vc<vl> s(n, vl(m));
+    FOR(i, n) FOR(j, m) {
+        ll cl = 0, ro = 0;
+        FOR(k, n) ro |= v[k][j];
+        FOR(k, m) cl |= v[i][k];
+        s[i][j] = ro | cl;
+    }
+
+    if(s == a) {
+        YES();
+        FOR(i, n) {
+            FOR(j, m) OUTT(v[i][j]); ln;
+        }
+    } else {
+        NO();
+    }
 }
 
 signed main() {
     SETUP_IO();
 
-    ll tt = TT(1);
+    ll tt = TT();
     FOR(i, tt) solve(i);
 
     return 0;

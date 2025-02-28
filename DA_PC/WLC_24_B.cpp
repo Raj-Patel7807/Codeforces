@@ -21,9 +21,12 @@ using ll = long long int;
 using ull = unsigned long long int;
 using db = double;
 using ld = long double;
-template <typename T, typename V> using pr = pair<T, V>;
+using vl = vector<ll>;
+using pl = pair<ll, ll>;
+using ml = map<ll, ll>;
 template <typename T> using vc = vector<T>;
 template <typename T> using vvc = vector<vector<T>>;
+template <typename T, typename V> using vcp = vector<pair<T, V>>;
 template <typename T, typename V> using umap = unordered_map<T, V>;
 template <typename T> using uset = unordered_set<T>;
 template <typename T> using stk = stack<T>;
@@ -131,24 +134,23 @@ inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 
 inline void solve(ll tt) {
     IN(ll, n);
-    IN(string, s);
+    VIN(ll, a, n);
 
-    ll cnt = 0, ans = 0;
-    FOR(i, n-2) {
-        if(s[i] == '1' && s[i+1] == '0' && s[i+2] == '1') {
-            cnt++; i++;
-        } else {
-            ans += (cnt)*(cnt+1)/2;
-            cnt = 0;
-        }
+    map<ll, ll> mp;
+    FORE(i, a) mp[i]++;
+
+    ll mx = maxval(a);
+    FOR(mx+1) if(mp[i] <= i) {
+        OUT(i); return;
     }
-    OUT(ans + (cnt)*(cnt+1)/2);
+
+    OUT(mx+1);
 }
 
 signed main() {
     SETUP_IO();
 
-    ll tt = TT(1);
+    ll tt = TT();
     FOR(i, tt) solve(i);
 
     return 0;

@@ -40,10 +40,10 @@ using idset = tree<ll, null_type,less<ll>, rb_tree_tag,tree_order_statistics_nod
 #define FORR1(s) for(ll i=(s)-1; i>=0; --i)
 #define FORR2(i, s) for(ll i=(s)-1; i>=0; --i)
 #define FORR3(i, s, e) for(ll i=(s)-1; i>=(e); --i)
+#define FORR4(i, s, e, dec) for(ll i=(s)-1; i>=e; i-=dec)
 #define GET_FOR(a, b, c, d, LOOP, ...) LOOP
-#define GET_FORR(a, b, c, LOOP, ...) LOOP
 #define FOR(...) GET_FOR(__VA_ARGS__, FOR4, FOR3, FOR2, FOR1)(__VA_ARGS__)
-#define FORR(...) GET_FORR(__VA_ARGS__, FORR3, FORR2, FORR1)(__VA_ARGS__)
+#define FORR(...) GET_FOR(__VA_ARGS__, FORR4, FORR3, FORR2, FORR1)(__VA_ARGS__)
 #define FORE(x, a) for(auto& x : (a))
 
 template <typename... T> inline void INPUT(T&... args) { ((cin >> args), ...); }
@@ -131,18 +131,23 @@ inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 
 inline void solve(ll tt) {
     IN(ll, n);
-    IN(string, s);
+    VIN(ll, a, n);
 
-    ll cnt = 0, ans = 0;
-    FOR(i, n-2) {
-        if(s[i] == '1' && s[i+1] == '0' && s[i+2] == '1') {
-            cnt++; i++;
+    ssort(a);
+
+    ll odd = n/4, bob = 0;
+    ll sum = accumulate(all(a), 0LL);
+
+    FORR(i, n-1, 0, 2) {
+        if(odd > 0) {
+            bob += a[i];
+            odd--;
         } else {
-            ans += (cnt)*(cnt+1)/2;
-            cnt = 0;
+            break;
         }
     }
-    OUT(ans + (cnt)*(cnt+1)/2);
+
+    OUT(sum - 2*bob);
 }
 
 signed main() {

@@ -129,26 +129,34 @@ inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
+vc<ll> fact;
+
 inline void solve(ll tt) {
     IN(ll, n);
-    IN(string, s);
+    VIN(ll, a, n);
 
-    ll cnt = 0, ans = 0;
-    FOR(i, n-2) {
-        if(s[i] == '1' && s[i+1] == '0' && s[i+2] == '1') {
-            cnt++; i++;
-        } else {
-            ans += (cnt)*(cnt+1)/2;
-            cnt = 0;
-        }
+    auto ncr = [&](ll n, ll r) -> ll {
+        return (modmult(modmult(fact[n], modinv(fact[n-r])), modinv(fact[r])));
+    };
+
+    ssort(a);
+    ll ans = 0;
+
+    FOR(n) {
+        ll x = ncr(n, i+1);
+        ans += modmult(x, a[i]);
+        ans %= MOD;
     }
-    OUT(ans + (cnt)*(cnt+1)/2);
+
+    OUT(ans);
 }
 
 signed main() {
     SETUP_IO();
 
-    ll tt = TT(1);
+    factorial(1e5 + 2, fact);
+
+    ll tt = TT();
     FOR(i, tt) solve(i);
 
     return 0;

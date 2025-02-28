@@ -130,25 +130,23 @@ inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    IN(ll, n);
-    IN(string, s);
+    IN(ll, l, r, k);
 
-    ll cnt = 0, ans = 0;
-    FOR(i, n-2) {
-        if(s[i] == '1' && s[i+1] == '0' && s[i+2] == '1') {
-            cnt++; i++;
-        } else {
-            ans += (cnt)*(cnt+1)/2;
-            cnt = 0;
+    FOR(i, l, r+1) {
+        ll y = k / gcd(i, k);
+        ll mny = (l + y - 1)/y * y;
+
+        if(mny <= r) {
+            OUTT(i, mny); ln; return;
         }
     }
-    OUT(ans + (cnt)*(cnt+1)/2);
+    OUT(-1);
 }
 
 signed main() {
     SETUP_IO();
 
-    ll tt = TT(1);
+    ll tt = TT();
     FOR(i, tt) solve(i);
 
     return 0;

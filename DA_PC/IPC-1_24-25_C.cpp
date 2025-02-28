@@ -131,24 +131,37 @@ inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 
 inline void solve(ll tt) {
     IN(ll, n);
-    IN(string, s);
 
-    ll cnt = 0, ans = 0;
-    FOR(i, n-2) {
-        if(s[i] == '1' && s[i+1] == '0' && s[i+2] == '1') {
-            cnt++; i++;
-        } else {
-            ans += (cnt)*(cnt+1)/2;
-            cnt = 0;
+    if(n & 1) {
+        ll ct = 0;
+        ll cnt = 1;
+        ll x = n*n;
+        ll a = (x - 3) ^ (x - 4) ^ (x - 5);
+        while(x /= 2) cnt++;
+        ll cc = power(2, cnt);
+
+        FOR(i, n) {
+            FOR(j, n) {
+                if(i == n-1 && j == n-2) {
+                    OUTT(cc, cc+a); ln;
+                    return;
+                }
+                OUTT(ct); ct++;
+            }
+            ln;
+        }
+    } else {
+        ll ct = 0;
+        FOR(i, n) {
+            FOR(j, n) { OUTT(ct); ct++; } ln;
         }
     }
-    OUT(ans + (cnt)*(cnt+1)/2);
 }
 
 signed main() {
     SETUP_IO();
 
-    ll tt = TT(1);
+    ll tt = TT();
     FOR(i, tt) solve(i);
 
     return 0;

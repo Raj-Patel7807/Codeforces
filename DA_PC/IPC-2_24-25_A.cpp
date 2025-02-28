@@ -131,24 +131,14 @@ inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 
 inline void solve(ll tt) {
     IN(ll, n);
-    IN(string, s);
 
-    ll cnt = 0, ans = 0;
-    FOR(i, n-2) {
-        if(s[i] == '1' && s[i+1] == '0' && s[i+2] == '1') {
-            cnt++; i++;
-        } else {
-            ans += (cnt)*(cnt+1)/2;
-            cnt = 0;
-        }
-    }
-    OUT(ans + (cnt)*(cnt+1)/2);
+    NO(n % 9);
 }
 
 signed main() {
     SETUP_IO();
 
-    ll tt = TT(1);
+    ll tt = TT();
     FOR(i, tt) solve(i);
 
     return 0;

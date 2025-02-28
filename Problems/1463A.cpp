@@ -12,7 +12,7 @@ using namespace __gnu_pbds;
 using namespace std;
 
 #ifndef ONLINE_JUDGE
-    #include "D:/Code_PlayGround/C++/Header/debug.hpp"
+    #include "../Header/debug.hpp"
 #else
     #define debug(...) 7807
 #endif
@@ -21,9 +21,12 @@ using ll = long long int;
 using ull = unsigned long long int;
 using db = double;
 using ld = long double;
-template <typename T, typename V> using pr = pair<T, V>;
+using vl = vector<ll>;
+using pl = pair<ll, ll>;
+using ml = map<ll, ll>;
 template <typename T> using vc = vector<T>;
 template <typename T> using vvc = vector<vector<T>>;
+template <typename T, typename V> using vcp = vector<pair<T, V>>;
 template <typename T, typename V> using umap = unordered_map<T, V>;
 template <typename T> using uset = unordered_set<T>;
 template <typename T> using stk = stack<T>;
@@ -89,9 +92,9 @@ inline void SETUP_IO(bool FILE_IO = true) {
     ios_base :: sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
     if(FILE_IO) {
         #ifndef ONLINE_JUDGE
-            freopen("D:/Code_PlayGround/C++/Input.txt", "r", stdin);
-            freopen("D:/Code_PlayGround/C++/Output.txt", "w", stdout);
-            freopen("D:/Code_PlayGround/C++/Debug.txt", "w", stderr);
+            freopen("Input.txt", "r", stdin);
+            freopen("Output.txt", "w", stdout);
+            freopen("Debug.txt", "w", stderr);
         #endif
     }
 }
@@ -130,19 +133,13 @@ inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    IN(ll, n);
-    IN(string, s);
+    IN(ll, a, b, c);
 
-    ll cnt = 0, ans = 0;
-    FOR(i, n-2) {
-        if(s[i] == '1' && s[i+1] == '0' && s[i+2] == '1') {
-            cnt++; i++;
-        } else {
-            ans += (cnt)*(cnt+1)/2;
-            cnt = 0;
-        }
+    if((a + b + c) % 9 != 0) {
+        NO(); return;
     }
-    OUT(ans + (cnt)*(cnt+1)/2);
+
+    YES(min({a, b, c}) >= (a + b + c)/9);
 }
 
 signed main() {
