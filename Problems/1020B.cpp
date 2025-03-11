@@ -1,14 +1,9 @@
-/*╔═════════════════════════════════════════════════╗*\
-  ║                                                 ║
-  ║                 @Raj_Patel_7807                 ║
-  ║               Code By : Raj_Patel               ║
-  ║                                                 ║
-\*╚═════════════════════════════════════════════════╝*/
+/**
+ *      Author : Raj Patel
+ *      @Raj_Patel_7807
+**/
 
 #include <bits/stdc++.h>
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
-using namespace __gnu_pbds;
 using namespace std;
 
 #ifndef ONLINE_JUDGE
@@ -17,13 +12,17 @@ using namespace std;
     #define debug(...) 7807
 #endif
 
+// #include <ext/pb_ds/assoc_container.hpp>
+// #include <ext/pb_ds/tree_policy.hpp>
+// using namespace __gnu_pbds;
+// using idset = tree<ll, null_type,less<ll>, rb_tree_tag,tree_order_statistics_node_update>;
+
 using ll = long long int;
 using ull = unsigned long long int;
 using db = double;
 using ld = long double;
 template <typename T, typename V> using pr = pair<T, V>;
 template <typename T> using vc = vector<T>;
-template <typename T> using vvc = vector<vector<T>>;
 template <typename T, typename V> using umap = unordered_map<T, V>;
 template <typename T> using uset = unordered_set<T>;
 template <typename T> using stk = stack<T>;
@@ -31,7 +30,6 @@ template <typename T> using qu = queue<T>;
 template <typename T> using dqu = deque<T>;
 template <typename T> using pq = priority_queue<T>;
 template <typename T> using pqg = priority_queue<T, vector<T>, greater<T>>;
-using idset = tree<ll, null_type,less<ll>, rb_tree_tag,tree_order_statistics_node_update>;
 #define int ll
 
 #define FOR1(s) for(ll i=0; i<(s); ++i)
@@ -60,11 +58,8 @@ inline void NO(bool F = true, bool S = false) { cout << (F ? (S ? "No\n" : "NO\n
 
 #define endl '\n'
 #define ln cout << '\n';
-#define PB push_back
-#define EB emplace_back
-#define ins insert
-#define PPB pop_back
-#define MP make_pair
+#define PUSH push_back
+#define POP pop_back
 #define FF first
 #define SS second
 #define UB(v, a) upper_bound((v).begin(), (v).end(), (a))
@@ -97,46 +92,21 @@ inline void SETUP_IO(bool FILE_IO = true) {
     }
 }
 
-#define cntSetBit __builtin_popcountll
-inline ll gcd(ll a, ll b) { while(b) { a %= b; swap(a, b); } return a; }
-inline ll lcm(ll a, ll b) { return ((a / gcd(a, b)) * b); }
-inline bool isPrime(ll n) {
-    if(n <= 1) return false; if(n <= 3) return true; if(n % 2 == 0 || n % 3 == 0) return false;
-    for(ll i=5; i*i<=n; i+=6) { if(n % i == 0 || n % (i+2) == 0) return false; } return true;
-}
-void prime(ll n, vector<bool>& ispr) {
-    ispr.resize(n+1, true); ispr[0] = ispr[1] = false;
-    for(ll i=2; i*i<=n; i++) { if(ispr[i]) { for(ll j=i*i; j<=n; j+=i) { ispr[j] = false; } } }
-}
-void prime(ll n, vector<ll>& pr) {
-    vector<bool> ispr; prime(n, ispr); for(ll i=2; i<=n; i++) { if(ispr[i]) { pr.push_back(i); } }
-}
-inline ll power(ll a, ll b, ll mod = MOD) {
-    ll ans = 1; a %= mod; while(b > 0) { if(b & 1) { ans = (ans * a) % mod; } a = (a * a) % mod; b >>= 1; } return ans;
-}
-inline void factorial(ll n, vector<ll>& a) { a.resize(n+1, 1); for(ll i=1; i<=n; i++) { a[i] = (a[i-1] * i) % MOD; } }
-inline bool isPowOfTwo(ll n) { return ((n > 0) && !(n & (n-1))); }
-inline bool isPerfectSq(ll n) { if(n < 0) return false; ll sr = static_cast<ll>(sqrt(n)); return (sr*sr == n); }
-inline ll modadd(ll a, ll b, ll mod = MOD) { return ((a % mod + b % mod) % mod); }
-inline ll modmult(ll a, ll b, ll mod = MOD) { return ((a % mod * b % mod) % mod); }
-inline ll modinv(ll a, ll mod = MOD) { return power(a, mod-2, mod); }
-inline ll moddiv(ll a, ll b, ll mod = MOD) { return modmult(a, modinv(b, mod), mod); }
-inline ll msbPos(ll n) { if(n == 0) { return -1; } return (63 - (__builtin_clzll(n))); }
-inline ll getBit(ll n, ll pos) { return ((n >> pos) & 1); }
-inline ll setBit(ll n, ll pos) { return (n | (1 << pos)); }
-inline ll clearBit(ll n, ll pos) { return (n & (~(1 << pos))); }
-inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
-
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    VVIN(ll, a, 3, 3);
+    IN(ll, n);
+    VIN(ll, a, n);
 
-    a[0][0] = (a[1][2] + a[2][1])/2;
-    a[1][1] = (a[2][0] + a[0][2])/2;
-    a[2][2] = a[0][1] + a[0][2] - a[1][1];
-
-    FOR(3) { FOR(j, 3) { OUTT(a[i][j]);} ln; }
+    FOR(n) {
+        vc<ll> v(n+1, 0);
+        ll x = i+1;
+        while(true) {
+            if(v[x] == 1) { OUTT(x); break; }
+            v[x] = 1; x = a[x-1];
+        }
+    }
+    ln;
 }
 
 signed main() {

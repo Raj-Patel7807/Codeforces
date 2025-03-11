@@ -96,6 +96,10 @@ inline void SETUP_IO(bool FILE_IO = true) {
         #endif
     }
 }
+inline ll ask(ll l, ll r) {
+    cout << "? " << l << ' ' << r << endl; cout.flush();
+    ll result; cin >> result; return result;
+}
 
 #define cntSetBit __builtin_popcountll
 inline ll gcd(ll a, ll b) { while(b) { a %= b; swap(a, b); } return a; }
@@ -118,6 +122,7 @@ inline void factorial(ll n, vector<ll>& a) { a.resize(n+1, 1); for(ll i=1; i<=n;
 inline bool isPowOfTwo(ll n) { return ((n > 0) && !(n & (n-1))); }
 inline bool isPerfectSq(ll n) { if(n < 0) return false; ll sr = static_cast<ll>(sqrt(n)); return (sr*sr == n); }
 inline ll modadd(ll a, ll b, ll mod = MOD) { return ((a % mod + b % mod) % mod); }
+inline ll modsub(ll a, ll b, ll mod = MOD) { return (((a % mod - b % mod) + mod) % mod); }
 inline ll modmult(ll a, ll b, ll mod = MOD) { return ((a % mod * b % mod) % mod); }
 inline ll modinv(ll a, ll mod = MOD) { return power(a, mod-2, mod); }
 inline ll moddiv(ll a, ll b, ll mod = MOD) { return modmult(a, modinv(b, mod), mod); }
@@ -130,19 +135,19 @@ inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    VVIN(ll, a, 3, 3);
+    IN(ll, n);
 
-    a[0][0] = (a[1][2] + a[2][1])/2;
-    a[1][1] = (a[2][0] + a[0][2])/2;
-    a[2][2] = a[0][1] + a[0][2] - a[1][1];
-
-    FOR(3) { FOR(j, 3) { OUTT(a[i][j]);} ln; }
+    if(n & 1) {
+        OUT((n+1)/2 * 5 + n/2 * 3);
+    } else {
+        OUT((n+2)/2 * 5 + (n-2)/2 * 3);
+    }
 }
 
 signed main() {
     SETUP_IO();
 
-    ll tt = TT();
+    ll tt = TT(1);
     FOR(i, tt) solve(i);
 
     return 0;

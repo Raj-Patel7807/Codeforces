@@ -12,7 +12,7 @@ using namespace __gnu_pbds;
 using namespace std;
 
 #ifndef ONLINE_JUDGE
-    #include "../Header/debug.hpp"
+    #include "D:/Code_PlayGround/C++/Header/debug.hpp"
 #else
     #define debug(...) 7807
 #endif
@@ -21,16 +21,14 @@ using ll = long long int;
 using ull = unsigned long long int;
 using db = double;
 using ld = long double;
-using vl = vector<ll>;
-using pl = pair<ll, ll>;
-using ml = map<ll, ll>;
+template <typename T, typename V> using pr = pair<T, V>;
 template <typename T> using vc = vector<T>;
 template <typename T> using vvc = vector<vector<T>>;
-template <typename T, typename V> using vcp = vector<pair<T, V>>;
 template <typename T, typename V> using umap = unordered_map<T, V>;
 template <typename T> using uset = unordered_set<T>;
 template <typename T> using stk = stack<T>;
 template <typename T> using qu = queue<T>;
+template <typename T> using dqu = deque<T>;
 template <typename T> using pq = priority_queue<T>;
 template <typename T> using pqg = priority_queue<T, vector<T>, greater<T>>;
 using idset = tree<ll, null_type,less<ll>, rb_tree_tag,tree_order_statistics_node_update>;
@@ -43,10 +41,10 @@ using idset = tree<ll, null_type,less<ll>, rb_tree_tag,tree_order_statistics_nod
 #define FORR1(s) for(ll i=(s)-1; i>=0; --i)
 #define FORR2(i, s) for(ll i=(s)-1; i>=0; --i)
 #define FORR3(i, s, e) for(ll i=(s)-1; i>=(e); --i)
+#define FORR4(i, s, e, dec) for(ll i=(s)-1; i>=e; i-=dec)
 #define GET_FOR(a, b, c, d, LOOP, ...) LOOP
-#define GET_FORR(a, b, c, LOOP, ...) LOOP
 #define FOR(...) GET_FOR(__VA_ARGS__, FOR4, FOR3, FOR2, FOR1)(__VA_ARGS__)
-#define FORR(...) GET_FORR(__VA_ARGS__, FORR3, FORR2, FORR1)(__VA_ARGS__)
+#define FORR(...) GET_FOR(__VA_ARGS__, FORR4, FORR3, FORR2, FORR1)(__VA_ARGS__)
 #define FORE(x, a) for(auto& x : (a))
 
 template <typename... T> inline void INPUT(T&... args) { ((cin >> args), ...); }
@@ -92,11 +90,15 @@ inline void SETUP_IO(bool FILE_IO = true) {
     ios_base :: sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
     if(FILE_IO) {
         #ifndef ONLINE_JUDGE
-            freopen("Input.txt", "r", stdin);
-            freopen("Output.txt", "w", stdout);
-            freopen("Debug.txt", "w", stderr);
+            freopen("D:/Code_PlayGround/C++/Input.txt", "r", stdin);
+            freopen("D:/Code_PlayGround/C++/Output.txt", "w", stdout);
+            freopen("D:/Code_PlayGround/C++/Debug.txt", "w", stderr);
         #endif
     }
+}
+inline ll ask(ll l, ll r) {
+    cout << "? " << l << ' ' << r << endl; cout.flush();
+    ll result; cin >> result; return result;
 }
 
 #define cntSetBit __builtin_popcountll
@@ -119,8 +121,8 @@ inline ll power(ll a, ll b, ll mod = MOD) {
 inline void factorial(ll n, vector<ll>& a) { a.resize(n+1, 1); for(ll i=1; i<=n; i++) { a[i] = (a[i-1] * i) % MOD; } }
 inline bool isPowOfTwo(ll n) { return ((n > 0) && !(n & (n-1))); }
 inline bool isPerfectSq(ll n) { if(n < 0) return false; ll sr = static_cast<ll>(sqrt(n)); return (sr*sr == n); }
-inline bool compbyss(const pair<ll, ll>& a, const pair<ll, ll>& b) { return a.second < b.second; }
 inline ll modadd(ll a, ll b, ll mod = MOD) { return ((a % mod + b % mod) % mod); }
+inline ll modsub(ll a, ll b, ll mod = MOD) { return (((a % mod - b % mod) + mod) % mod); }
 inline ll modmult(ll a, ll b, ll mod = MOD) { return ((a % mod * b % mod) % mod); }
 inline ll modinv(ll a, ll mod = MOD) { return power(a, mod-2, mod); }
 inline ll moddiv(ll a, ll b, ll mod = MOD) { return modmult(a, modinv(b, mod), mod); }
@@ -133,22 +135,27 @@ inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    IN(ll, n, m);
-    VVIN(char, s, n, m);
+    IN(ll, n, k);
+    VIN(ll, a, n);
 
-    vc<vl> dp(n, vl(m, 0));
-    if(s[0][0] == 'H' || s[0][0] == 'A' || s[0][0] == 'C' || s[0][0] == 'K') dp[0][0] = 1;
+    vvc<ll> v(k);
+    ll ans = INF;
 
-    FOR(i, n) FOR(j, m) {
-        if(s[i][j] != 'H' && s[i][j] != 'A' && s[i][j] != 'C' && s[i][j] != 'K') {
-            dp[i][j] = 0;
-            continue;
-        }
-        if(i > 0) dp[i][j] = (dp[i][j] + dp[i-1][j]) % MOD;
-        if(j > 0) dp[i][j] = (dp[i][j] + dp[i][j-1]) % MOD;
+    FOR(n) v[a[i]-1].PB(i);
+    FOR(k) {
+        ll m = LEN(v[i]);
+        if(!m) continue;
+
+        vc<ll> b;
+        b.PB(v[i][0]); b.PB(n - v[i][m-1] - 1);
+
+        FOR(j, m-1) b.PB(v[i][j+1] - v[i][j] - 1);
+        ssort(b);
+
+        if(LEN(b) >= 2) ans = min(ans, max(b.back()/2, b[LEN(b) - 2]));
+        else ans = min(ans, b.back()/2);
     }
-
-    OUT(dp[n-1][m-1]);
+    OUT(ans);
 }
 
 signed main() {

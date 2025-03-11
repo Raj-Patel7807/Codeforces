@@ -96,6 +96,10 @@ inline void SETUP_IO(bool FILE_IO = true) {
         #endif
     }
 }
+inline ll ask(ll l, ll r) {
+    cout << "? " << l << ' ' << r << endl; cout.flush();
+    ll result; cin >> result; return result;
+}
 
 #define cntSetBit __builtin_popcountll
 inline ll gcd(ll a, ll b) { while(b) { a %= b; swap(a, b); } return a; }
@@ -130,19 +134,28 @@ inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    VVIN(ll, a, 3, 3);
+    IN(ll, n, k);
+    VIN(ll, a, n);
 
-    a[0][0] = (a[1][2] + a[2][1])/2;
-    a[1][1] = (a[2][0] + a[0][2])/2;
-    a[2][2] = a[0][1] + a[0][2] - a[1][1];
+    if(n == 1) {
+        YES(a[0] == k); return;
+    }
 
-    FOR(3) { FOR(j, 3) { OUTT(a[i][j]);} ln; }
+    ssort(a);
+    ll i = 0, j = 1;
+    while(i < n && j < n) {
+        if(a[i] + abs(k) == a[j]) {
+            YES(); return;
+        } else if(a[i] + abs(k) < a[j]) i++;
+        else j++;
+    }
+    NO();
 }
 
 signed main() {
     SETUP_IO();
 
-    ll tt = TT();
+    ll tt = TT(1);
     FOR(i, tt) solve(i);
 
     return 0;

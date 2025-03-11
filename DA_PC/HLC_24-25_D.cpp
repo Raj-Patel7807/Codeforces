@@ -96,6 +96,10 @@ inline void SETUP_IO(bool FILE_IO = true) {
         #endif
     }
 }
+inline ll ask(ll l, ll r) {
+    cout << "? " << l << ' ' << r << endl; cout.flush();
+    ll result; cin >> result; return result;
+}
 
 #define cntSetBit __builtin_popcountll
 inline ll gcd(ll a, ll b) { while(b) { a %= b; swap(a, b); } return a; }
@@ -118,6 +122,7 @@ inline void factorial(ll n, vector<ll>& a) { a.resize(n+1, 1); for(ll i=1; i<=n;
 inline bool isPowOfTwo(ll n) { return ((n > 0) && !(n & (n-1))); }
 inline bool isPerfectSq(ll n) { if(n < 0) return false; ll sr = static_cast<ll>(sqrt(n)); return (sr*sr == n); }
 inline ll modadd(ll a, ll b, ll mod = MOD) { return ((a % mod + b % mod) % mod); }
+inline ll modsub(ll a, ll b, ll mod = MOD) { return (((a % mod - b % mod) + mod) % mod); }
 inline ll modmult(ll a, ll b, ll mod = MOD) { return ((a % mod * b % mod) % mod); }
 inline ll modinv(ll a, ll mod = MOD) { return power(a, mod-2, mod); }
 inline ll moddiv(ll a, ll b, ll mod = MOD) { return modmult(a, modinv(b, mod), mod); }
@@ -130,19 +135,40 @@ inline ll toggleBit(ll n, ll pos) { return (n ^ (1 << pos)); }
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 inline void solve(ll tt) {
-    VVIN(ll, a, 3, 3);
+    IN(ll, n, m);
 
-    a[0][0] = (a[1][2] + a[2][1])/2;
-    a[1][1] = (a[2][0] + a[0][2])/2;
-    a[2][2] = a[0][1] + a[0][2] - a[1][1];
+    ll z = min(n,m);
+    z = z % MOD;
+    ll tot = ((n % MOD) * (m % MOD)) % MOD;
+    ll ans = ((((tot)*(tot - 1)) % MOD) * modinv(2)) % MOD;
+    ll dig = (n + m - 3) % MOD;
+    ll mid = dig - 2*(z - 1);
+    ll neg = ((((((z)*(z - 1)) % MOD)*(z + 1)) % MOD)*modinv(3)) % MOD;
+    neg = (neg * 2) % MOD;
+    ll addd = ((((z)*(z - 1)) % MOD)*(modinv(2))) % MOD;
+    addd = (addd * 2) % MOD;
+    mid = (mid + MOD) % MOD;
 
-    FOR(3) { FOR(j, 3) { OUTT(a[i][j]);} ln; }
+    if(n == 1 && m == 1) {
+        OUT(0); return;
+    } else {
+        if(n == m) {
+            ans = (ans + addd) % MOD;
+            ans = (ans - neg + MOD) % MOD;
+            OUT(ans);
+        } else {
+            addd = (mid * addd) % MOD;
+            ans = (ans - addd + MOD) % MOD;
+            ans = (ans - neg + MOD) % MOD;
+            OUT(ans);
+        }
+    }
 }
 
 signed main() {
     SETUP_IO();
 
-    ll tt = TT();
+    ll tt = TT(1);
     FOR(i, tt) solve(i);
 
     return 0;
