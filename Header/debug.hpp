@@ -2,6 +2,7 @@
 #define DEBUG_HPP
 
 #include <bits/stdc++.h>
+using namespace std;
 
 #define debug1(a) cerr << #a << " = "; debug_print(a); cerr << '\n';
 #define debug2(a, b) cerr << #a << " = "; debug_print(a); cerr << '\n'; \
