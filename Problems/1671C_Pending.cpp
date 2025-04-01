@@ -79,22 +79,17 @@ inline void SETUP_IO(bool FILE_IO = true) {
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 void solve(ll tt) {
-    IN(ll, n, sum);
-    VIN(ll, a, n); debug(tt);
+    IN(ll, n, k); VIN(ll, a, n);
+    sort(all(a));
 
-    ll cnt = count(all(a), 1);
-    if(cnt < sum) { OUT(-1); return; }
-    if(cnt == sum) { OUT(0); return; }
-
-    ll s = 0, e = n-1, ans = 0, tmp = cnt - sum;
-    while(s <= e && tmp) {
-        ll cs = 0, ce = 0, ss = s, ee = e;
-        if(a[ss] == 0) while(!a[ss++]) cs++;
-        if(a[ee] == 0) while(!a[ee--]) ce++;
-        if(cs <= ce) { s = ss + 1; ans += cs+1; tmp--; }
-        else { e = ee - 1; ans += ce+1; tmp--; }
-    } debug(s, e);
-    OUT(ans);
+    ll ans = 0;
+    while(true) {
+        ll cur = 0, s = 0;
+        while(cur < n && a[cur] + s <= k) { s += a[cur]; cur++; }
+        ans += cur; debug(cur);
+        if(!cur) { OUT(ans); return; }
+        FOR(n) a[i]++; debug(a);
+    }
 }
 
 signed main() {

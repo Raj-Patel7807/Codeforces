@@ -79,16 +79,14 @@ inline void SETUP_IO(bool FILE_IO = true) {
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 void solve(ll tt) {
-    IN(ll, n, k, x); VIN(ll, a, n);
-    sort(all(a)); debug(a, n, k, x);
-    ll ans = 1, kk = k;
-    FOR(n-1) if(a[i+1] - a[i] > x) { k ? k -= (a[i+1]-a[i]-1)/kk : ans++; debug(i, k);}
-    OUT(ans);
+    IN(ll, x, y);
+    if(!(x ^ y)) { OUT(-1); return; }
+    OUT((1LL << 48) - max(x, y));
 }
 
 signed main() {
     SETUP_IO();
-    ll tt = TT();
+    ll tt = TT(1);
     FOR(i, tt) solve(i);
     return 0;
 }
