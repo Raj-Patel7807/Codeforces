@@ -79,10 +79,9 @@ inline void SETUP_IO(bool FILE_IO = true) {
 //==========^==========<<   C O D E   B Y   R A J  P A T E L   >>==========^==========//
 
 void solve(ll tt) {
-    IN(ll, n); debug(tt, n, n/9, n % 9, n*(n+1)/2);
-    ll a = n/10-1, b = n % 10, tmp = 46, ans = 0;
-    FOR(a) { ans += tmp; tmp += 10; } debug(ans);
-    FOR(i, a*10+1, n+1) { ll j = i; while(j) { ans += (j % 10); j /= 10; } }
+    IN(ll, n, m, k, h); VIN(ll, a, n);
+    ll ans = 0;
+    FOR(n) if((a[i] ^ h) && abs(a[i] - h)/k < m && !(abs(a[i] - h) % k)) ans++;
     OUT(ans);
 }
 
